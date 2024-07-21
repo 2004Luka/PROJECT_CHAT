@@ -29,6 +29,15 @@ export const sendMessage = async(req,res)=>{
             conversation.messages.push(newMessage._id);
         }
 
+
+        //socket iofunctionality goes here 
+
+        //this will run in parallel
+        await Promise.all([
+            await conversation.save(),
+            await newMessage.save()
+        ]);
+
         res.status(201).json(newMessage);
         
 
