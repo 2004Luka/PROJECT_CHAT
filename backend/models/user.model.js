@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
         default:"",
 
     }
-});
+    //=> member since <createdAt> member since 12:23:40 for example
+},{timestamps:true});
 
 const User = mongoose.model("User",userSchema);
 
