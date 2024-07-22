@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
-import userRouts from './routs/user.routes.js';
+import userRoutes from './routs/user.routes.js';
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
