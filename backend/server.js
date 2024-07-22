@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
+import userRouts from './routs/user.routes.js';
+
 import connectToMongoDB from "./db/connectToMongoDB.js";
 
 const app =express();
@@ -18,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/api/auth",authRouts)
 app.use("/api/messages",messageRoutes)
+app.use("/api/users",userRoutes)
 
 // app.get("/",(req,res)=>{
 //     //root
