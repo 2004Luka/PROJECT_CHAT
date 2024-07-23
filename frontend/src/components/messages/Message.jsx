@@ -1,6 +1,7 @@
 import React from 'react'
 import {useAuthContext} from '../../context/AuthContext'
 import useConversation from '../../zustand/useConversation';
+import { extractTime } from '../../utils/extractTime';
 const Message = ({message}) => {
   const {authUser}=useAuthContext();
   const {selectedConversation}=useConversation();
@@ -9,7 +10,7 @@ const Message = ({message}) => {
   const chatClassName = fromMe? 'chat-end':'chat-start';
   const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
   const bubbleBgColor = fromMe? 'bg-blue-500': "";
-
+  const formattedTime = extractTime(message.createdAt);
 
 
   return (
@@ -22,8 +23,8 @@ const Message = ({message}) => {
                 />
             </div>
         </div>
-      <div className={`chat-bubble text-white ${bubbleBgColor}`}>{message.message}</div>
-      <time className="text-xs opacity-50">12:45</time>
+      <div className={`chat-bubble text-white max-w-xs break-words ${bubbleBgColor}`}>{message.message}</div>
+      <time className="text-xs opacity-50">{formattedTime}</time>
     </div>
   )
 }
