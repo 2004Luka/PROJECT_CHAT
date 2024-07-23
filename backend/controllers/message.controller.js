@@ -54,11 +54,11 @@ export const getMessage = async (req, res) => {
             participants: { $all: [senderId, userToChatId] },
         }).populate("messages");
 
+        console.log('Fetched conversation:', conversation);
 
-        if(!conversation) return res.status(200).json([]);
+        if (!conversation) return res.status(200).json([]);
 
-
-        const messages = conversation.messages
+        const messages = conversation.messages;
         res.status(200).json(messages);
 
     } catch (error) {
