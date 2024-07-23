@@ -59,7 +59,7 @@ export const getMessage = async (req, res) => {
 
 
         const messages = conversation.messages
-        res.status(200).json(conversation.messages);
+        res.status(200).json(messages);
 
     } catch (error) {
         console.log("error in getMessage controller: ", error.message);

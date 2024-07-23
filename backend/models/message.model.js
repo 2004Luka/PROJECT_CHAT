@@ -18,4 +18,6 @@ const messageSchema = new mongoose.Schema({
     //createAt,updatedAt for example updatedAt => message.createdAt : 15:30
 },{timestamps:true});
 
-export default messageSchema
+const Message = mongoose.model('Message', messageSchema);
+
+export default Message;
