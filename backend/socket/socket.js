@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io =new Server(server,{
     cors:{
-        origin:["http://localhost:3000","https://project-chat-pw3ukpqme-lukas-projects-e6b992d6.vercel.app"],
+        origin:["http://localhost:3000"],
         methods:["GET","POST"]
     }
 });
