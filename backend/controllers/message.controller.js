@@ -42,6 +42,8 @@ export const sendMessage = async (req, res) => {
         res.status(201).json(newMessage);
 
         // Socket.io functionality goes here
+        io.emit('newUser', newUser);  // Emit event with new user details
+
 
         const reveiverSocketId = getRecieverSocketId(receiverId);
         if(reveiverSocketId){

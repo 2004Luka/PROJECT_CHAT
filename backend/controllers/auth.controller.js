@@ -40,6 +40,7 @@ export const signup = async (req, res) => {
             username: newUser.username,
             profilePic: newUser.profilePic
         });
+        
 
     } catch (error) {
         console.log("Error in signup controller:", error.message);
