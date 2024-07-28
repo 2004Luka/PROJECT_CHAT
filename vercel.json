@@ -1,11 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "PROJECT_CHAT/backend/**/*.js", "use": "@vercel/node" },
-    { "src": "PROJECT_CHAT/frontend/**/*", "use": "@vercel/static-build" }
+    { "src": "backend/**/*.js", "use": "@vercel/node" },
+    { "src": "frontend/**/*", "use": "@vercel/static-build", "config": { "distDir": "frontend/build" } }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/PROJECT_CHAT/backend/$1" },
-    { "src": "/(.*)", "dest": "/PROJECT_CHAT/frontend/$1/index.html" }
+    { "src": "/api/(.*)", "dest": "/backend/$1" },
+    { "src": "/(.*)", "dest": "/frontend/build/$1" }
   ]
 }
