@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),rgba(65, 65, 65);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+
+:root {
+  --text:#ffffff;
+  --text-2:#ffffff;
+  --primary: #29F294;
+  --secondary:#03A678;
+  --background: #252525;
 }
 
 

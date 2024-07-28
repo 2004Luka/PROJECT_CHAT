@@ -6,7 +6,7 @@ const LogoutButton = () => {
   const { loading, logout } = useLogout();
 
   return (
-    <div className='mt-auto'>
+    <div className=''>
       {!loading ? (
         <CiLogout className='w-6 h-6 text-white cursor-pointer bg-transparent' onClick={logout} />
       ) : (
