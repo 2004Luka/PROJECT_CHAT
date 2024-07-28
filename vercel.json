@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "builds": [
@@ -20,17 +19,5 @@
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ],
-  "headers": [
-    {
-      "source": "/src/*.jsx",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/javascript"
-        }
-      ]
-    }
   ]
 }
-
