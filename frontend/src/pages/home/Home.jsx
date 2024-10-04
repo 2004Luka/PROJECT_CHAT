@@ -15,7 +15,7 @@ const Home = () => {
   }, []);
 
   return isMobile ? (
-    <div className='flex flex-col h-screen w-full rounded-lg overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'>
+    <div className='flex flex-col h-screen w-full rounded-lg overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl ' >
       <div className='h-1/3 overflow-y-auto'>
         <Sidebar className='h-full' />
       </div>
@@ -24,11 +24,14 @@ const Home = () => {
       </div>
     </div>
   ) : (
-    <div className='flex flex-row h-screen w-screen rounded-lg overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'>
+    <div className='flex flex-row h-[100%] w-[100%] rounded-xl
+                    bg-clip-padding backdrop-filter backdrop-blur-lg 
+                    bg-opacity-0 shadow-2xl bg-[var(--background)] 
+                    '>
       <div className='w-full md:w-[25rem]  h-full overflow-y-auto'>
         <Sidebar className='h-full' />
       </div>
-      <div className='w-full md:w-1/3 h-full overflow-y-auto lg:w-full'>
+      <div className='w-full md:w-1/3 lg:w-full'>
         <MessageContainer className='h-full' />
       </div>
     </div>

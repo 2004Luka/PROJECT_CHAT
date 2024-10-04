@@ -4,11 +4,14 @@
 
 
 :root {
-  --text:#ffffff;
-  --text-2:#ffffff;
-  --primary: #29F294;
-  --secondary:#03A678;
-  --background: #252525;
+  --text:#020202;
+  --text-2:#f0f0f0;
+  --primary: #3aeba7;
+  --secondary:#000000;
+  --background: #f0f0f0;
+  --background2: #cacaca;
+  --background3: #151b25;
+  --background4: #e0e0e0;
 }
 
 

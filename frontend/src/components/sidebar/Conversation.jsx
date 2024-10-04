@@ -10,21 +10,24 @@ const Conversation = ({conversation,lastIdx}) => {
     const isSelected = selectedConversation?._id===conversation._id;
     return (
         <>
-            <div className={`flex gap-2 items-center hover:bg-[var(--primary)] rounded p-2 py-1 cursor-pointer 
-                    ${isSelected ? "bg-[var(--primary)]":""}
+            <div className={`flex gap-5 items-center hover:bg-[var(--primary)] rounded p-2 py-1 cursor-pointer 
+                            h-[9vh] w-full border-b-[1px] border-opacity-50 border-black 
+                    ${isSelected ? "bg-[var(--primary)]":""  }
                 `}
                     onClick={()=>setSelectedConversation(conversation)}
                 >
                 <div className={`avatar  ${isOnline ? "online" : ""}`}>
-                    <div className="w-12 rounded-full">
-                        <img src={conversation.profilePic} className='bg-transparent'/>
+                    <div className="w-14 rounded-lg bg-white">
+                         <img src={conversation.profilePic} className=' size-fit'/>
                     </div>
                 </div>
 
                 <div className='flex flex-col flex-1'>
-                    <div className='flex gap-3 justify-between'>
+                    <div className='flex justify-between flex-col'>
                         <p className='font-bold text-[var(--text)] bg-transparent'>{conversation.fullName}</p>
+                        <p className='text-[var(--text)]'>last text from this person</p>
                     </div>
+
                 </div>
             </div>
 

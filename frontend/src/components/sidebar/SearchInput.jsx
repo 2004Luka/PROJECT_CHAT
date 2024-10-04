@@ -1,5 +1,4 @@
 import React,{useState}from 'react'
-import { FaSearchPlus } from "react-icons/fa";
 import useConversation from '../../zustand/useConversation';
 import useGetConversations from '../../hooks/useGetConversations'
 import toast from 'react-hot-toast';
@@ -33,13 +32,11 @@ const SearchInput = () => {
         <form 
             onSubmit={handleSubmit}
             className='flex items-center gap-2 mt-5'>
-            <input type="text" placeholder='Search...' className='input input=bordered rpunded-full text-[var(--text)] bg-[var(--text-2)] border border-[var(--primary)]' 
+            <input type="text" placeholder='Search...' className='input input=bordered rounded-lg text-[var(--text)] bg-[var(--text-2)] 
+                                                                border border-[var(--primary)] w-full' 
                 value={search}
                 onChange={(e)=> setSearch(e.target.value)}
             />
-            <button className='btn btn-circle bg-[var(--primary)] text-[var(--text-2)]'> 
-                <FaSearchPlus className='w-6 h-6 outline-none bg-transparent' />
-            </button>
         </form>
     )
 }
