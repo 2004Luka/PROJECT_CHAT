@@ -7,6 +7,9 @@ import { useAuthContext } from '../../context/AuthContext';
 
 
 
+import { FaPhone } from "react-icons/fa6";
+import { FaCamera } from "react-icons/fa";
+
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   useEffect(() => {
@@ -35,23 +38,19 @@ const MessageContainer = () => {
             
 
             <div className='h-[5vh] w-[5vh] bg-[var(--background)] flex items-center justify-center rounded-lg'>
-              <img src="../src/assets/phone-call.png" className='h-[3vh]'/>
+              <FaPhone className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />;
             </div>
             
             <div className='h-[5vh] w-[5vh] bg-[var(--background)] flex items-center justify-center rounded-lg'>
-              <img src="../src/assets/video-camera.png" className='h-[3vh]'/>
+              <FaCamera className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />;
             </div>
           
           </div>
           <div className='flex-1 overflow-y-auto'>
             <Messages />
           </div>
-          <div className='mt-auto w-full grid grid-cols-[96%,4%] items-center'>
+          <div className='mt-auto w-full'>
             <MessageInput />
-            
-            <div className='h-[5vh] w-[5vh] bg-[var(--primary)] flex items-center justify-center rounded-lg'>
-              <img src="../src/assets/send.png" className='h-[3vh]'/>
-            </div>
 
           </div>
         </>

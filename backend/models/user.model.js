@@ -25,7 +25,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"",
 
-    }
+    },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    friendRequests: [{
+        sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' }
+    }],
     //=> member since <createdAt> member since 12:23:40 for example
 },{timestamps:true});
 
