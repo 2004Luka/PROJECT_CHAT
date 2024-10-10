@@ -1,20 +1,40 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect } from 'react'
 import Messages from './Messages'
 import MessageInput from './MessageInput'
 import { TiMessages } from "react-icons/ti";
 import useConversation from '../../zustand/useConversation';
 import { useAuthContext } from '../../context/AuthContext';
-
-
-
-import { FaPhone } from "react-icons/fa6";
-import { FaCamera } from "react-icons/fa";
+import { FaPhone, FaCamera } from "react-icons/fa6";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { authUser } = useAuthContext();
+
   useEffect(() => {
     return () => setSelectedConversation(null);
-  }, []);
+  }, [setSelectedConversation]);
+
+  const getRecipientInfo = () => {
+    if (!selectedConversation) return null;
+    
+    // If it's a friend (has username property)
+    if (selectedConversation.username) {
+      return {
+        profilePic: selectedConversation.profilePic,
+        name: selectedConversation.fullName || selectedConversation.username,
+      };
+    }
+    
+    // If it's a conversation
+    const recipientId = selectedConversation.participants.find(id => id !== authUser._id);
+    const recipient = selectedConversation.participants.find(p => p._id === recipientId);
+    return {
+      profilePic: recipient?.profilePic,
+      name: recipient?.fullName || recipient?.username,
+    };
+  };
+
+  const recipientInfo = getRecipientInfo();
 
   return (
     <div className='flex flex-col h-full' >
@@ -26,23 +46,21 @@ const MessageContainer = () => {
           <div className='bg-[var(--primary)] px-4 py-4 mb-2 grid grid-cols-[90%,5%,5%] rounded-tr-xl'>
             <div className='flex items-center'> 
               <div className='avatar w-[5vh] h-[5vh] mr-4'>
-                  <img
-                    src={selectedConversation.profilePic}
-                    alt={`${selectedConversation.fullName}'s profile`}
-                    className='bg-white rounded-lg'
-                  />
-                </div>
-              <span className='text-[var(--text)] font-bold'>{selectedConversation.fullName}</span>
-            </div>
-            
-            
-
-            <div className='h-[5vh] w-[5vh] bg-[var(--background)] flex items-center justify-center rounded-lg'>
-              <FaPhone className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />;
+                <img
+                  src={recipientInfo?.profilePic}
+                  alt={`${recipientInfo?.name}'s profile`}
+                  className='bg-white rounded-lg'
+                />
+              </div>
+              <span className='text-[var(--text)] font-bold'>{recipientInfo?.name}</span>
             </div>
             
             <div className='h-[5vh] w-[5vh] bg-[var(--background)] flex items-center justify-center rounded-lg'>
-              <FaCamera className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />;
+              <FaPhone className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />
+            </div>
+            
+            <div className='h-[5vh] w-[5vh] bg-[var(--background)] flex items-center justify-center rounded-lg'>
+              <FaCamera className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--primary)] transition duration-300 ml-1" />
             </div>
           
           </div>
@@ -51,7 +69,6 @@ const MessageContainer = () => {
           </div>
           <div className='mt-auto w-full'>
             <MessageInput />
-
           </div>
         </>
       )}

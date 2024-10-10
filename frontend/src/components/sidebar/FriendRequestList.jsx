@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import useGetFriendRequests from '../../hooks/useGetFriendRequests.js';
 import { useAuthContext } from "../../context/AuthContext.jsx"; // Make sure to import this for getting authUser
+import { useSocketContext } from '../../context/SocketContext.jsx';
 import toast from 'react-hot-toast';
 
 const FriendRequestList = () => {
     const { authUser } = useAuthContext(); // Get authUser from context
-    const { loading, friendRequests, refetchRequests } = useGetFriendRequests(authUser?._id);
+    const { loading, friendRequests, setFriendRequests, refetchRequests } = useGetFriendRequests(authUser?._id);
     const [respondingTo, setRespondingTo] = useState(null);
+    const { socket } = useSocketContext();
 
     useEffect(() => {
         console.log('AuthUser:', authUser);
         console.log('Friend Requests:', friendRequests);
     }, [authUser, friendRequests]);
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('friendRequestAccepted', ({ friend }) => {
+                // Remove the accepted request from the list
+                setFriendRequests(prev => prev.filter(req => req.sender._id !== friend._id));
+                toast.success(`You are now friends with ${friend.username}`);
+            });
+        }
+
+        return () => {
+            if (socket) {
+                socket.off('friendRequestAccepted');
+            }
+        };
+    }, [socket, setFriendRequests]);
 
     const handleRespond = async (senderId, action) => {
         setRespondingTo(senderId);
@@ -46,7 +64,15 @@ const FriendRequestList = () => {
                 throw new Error(data.error || 'Failed to respond to friend request');
             }
 
+            // Update local state immediately
+            setFriendRequests(prev => prev.filter(req => req.sender._id !== senderId));
             toast.success(data.message);
+
+            // Emit socket event if accepted
+            if (action === 'accept' && socket) {
+                socket.emit('friendRequestAccepted', { senderId, receiverId: authUser._id });
+            }
+
             refetchRequests(); // Refresh the friend requests
         } catch (error) {
             console.error('Error responding to friend request:', error);

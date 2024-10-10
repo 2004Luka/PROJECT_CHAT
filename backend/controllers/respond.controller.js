@@ -1,4 +1,5 @@
 import User from '../models/user.model.js'; // Import the User model
+import { io } from '../socket.js'; // Adjust the path as needed
 
 export const respondController = async (req, res) => {
     const { receiverId, senderId, action } = req.body; // action can be 'accept' or 'reject'
@@ -21,6 +22,8 @@ export const respondController = async (req, res) => {
             receiver.friends.push(sender._id);
             sender.friends.push(receiver._id);
             receiver.friendRequests[requestIndex].status = 'accepted';
+            io.to(senderId.toString()).emit('friendRequestAccepted', { friend: receiver });
+      io.to(receiverId.toString()).emit('friendRequestAccepted', { friend: sender });
         } else if (action === 'reject') {
             receiver.friendRequests[requestIndex].status = 'rejected';
         } else {
