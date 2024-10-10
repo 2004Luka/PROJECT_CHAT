@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
 import userRoutes from './routs/user.routes.js';
+import requestRoutes from './routs/request.routes.js' 
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/api/auth",authRouts)
 app.use("/api/messages",messageRoutes)
 app.use("/api/users",userRoutes)
+app.use("/api/friends",requestRoutes)
 
 app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
