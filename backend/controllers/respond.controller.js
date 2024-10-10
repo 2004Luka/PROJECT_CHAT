@@ -1,5 +1,5 @@
 import User from '../models/user.model.js'; // Import the User model
-import { io } from '../socket.js'; // Adjust the path as needed
+import { io } from '../socket/socket.js'; // Adjust the path as needed
 
 export const respondController = async (req, res) => {
     const { receiverId, senderId, action } = req.body; // action can be 'accept' or 'reject'
