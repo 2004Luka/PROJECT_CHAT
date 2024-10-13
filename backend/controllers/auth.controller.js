@@ -28,6 +28,7 @@ export const signup = async (req, res) => {
             password: hashedPassword,
             gender,
             profilePic: gender === 'male' ? boyProfilepic : girlProfilepic
+
         });
 
         await newUser.save();
@@ -38,7 +39,9 @@ export const signup = async (req, res) => {
             _id: newUser._id,
             fullName: newUser.fullName,
             username: newUser.username,
-            profilePic: newUser.profilePic
+            profilePic: newUser.profilePic,
+            token: token, // Include the token in the response
+
         });
         
 
