@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
+import { useSocketContext } from '../context/SocketContext'; // Import the SocketContext
 
 const useGetFriendRequests = (authUserId) => {
     const [loading, setLoading] = useState(false);
     const [friendRequests, setFriendRequests] = useState([]);
+    const { socket } = useSocketContext(); // Get the socket instance
 
     const fetchRequests = useCallback(async () => {
         if (!authUserId) {
@@ -35,7 +37,21 @@ const useGetFriendRequests = (authUserId) => {
 
     useEffect(() => {
         fetchRequests();
-    }, [fetchRequests]);
+
+        // Listen for incoming friend requests via Socket.IO
+        if (socket) {
+            socket.on('friendRequestReceived', (request) => {
+                setFriendRequests(prev => [...prev, request]);
+                toast.success(`${request.senderName} sent you a friend request!`);
+            });
+        }
+
+        return () => {
+            if (socket) {
+                socket.off('friendRequestReceived');
+            }
+        };
+    }, [fetchRequests, socket]);
 
     const refetchRequests = useCallback(() => {
         fetchRequests();
