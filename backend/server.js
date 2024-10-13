@@ -2,6 +2,7 @@ import path from "path"
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
@@ -20,6 +21,10 @@ const __dirname = path.resolve()
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:5000', // adjust as needed
+    credentials: true,
+}));
 
 app.use("/api/auth",authRouts)
 app.use("/api/messages",messageRoutes)
@@ -42,4 +47,3 @@ server.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`);
 
 });
-
