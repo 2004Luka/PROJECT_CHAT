@@ -10,6 +10,13 @@ const useSignup = () => {
     const success = handleInputErrors({ fullName, username, password, confirmPassword, gender });
     if (!success) return;
 
+    // New check for unique username
+    const isUsernameUnique = await checkUsernameUnique(username);
+    if (!isUsernameUnique) {
+      toast.error('Username is already taken');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('/api/auth/signup', {
@@ -24,6 +31,8 @@ const useSignup = () => {
       }
 
       localStorage.setItem('chat-user', JSON.stringify(data));
+      localStorage.setItem('token', data.token); // Store the token
+
       setAuthUser(data);
       toast.success('Sign up successful!');
     } catch (error) {
@@ -31,6 +40,13 @@ const useSignup = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // New function to check if the username is unique
+  const checkUsernameUnique = async (username) => {
+    const res = await fetch(`/api/auth/check-username?username=${username}`);
+    const data = await res.json();
+    return data.isUnique; // Assuming the API returns an object with an isUnique property
   };
 
   return { loading, signup };
