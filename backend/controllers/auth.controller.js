@@ -27,21 +27,20 @@ export const signup = async (req, res) => {
             username,
             password: hashedPassword,
             gender,
-            profilePic: gender === 'male' ? boyProfilepic : girlProfilepicz
+            profilePic: gender === 'male' ? boyProfilepic : girlProfilepic
         });
 
         await newUser.save();
 
-        generateTokenAndSetCookie(newUser._id, res);
+        const token = generateTokenAndSetCookie(newUser._id, res);
 
         res.status(201).json({
             _id: newUser._id,
             fullName: newUser.fullName,
             username: newUser.username,
-            profilePic: newUser.profilePic
+            profilePic: newUser.profilePic,
+            token: token
         });
-        
-
     } catch (error) {
         console.log("Error in signup controller:", error.message);
         res.status(500).json({ error: "Internal server error" });
@@ -58,7 +57,6 @@ export const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid credentials" });
         }
 
-        // Generate the token and set the cookie
         const token = generateTokenAndSetCookie(user._id, res);
 
         res.status(200).json({
@@ -66,9 +64,8 @@ export const login = async (req, res) => {
             fullName: user.fullName,
             username: user.username,
             profilePic: user.profilePic,
-            token: token // Include the token in the response
+            token: token
         });
-
     } catch (error) {
         console.log("Error in login controller:", error.message);
         res.status(500).json({ error: "Internal server error" });
@@ -78,8 +75,9 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
     try {
         res.cookie("jwt", "", { maxAge: 0 });
+        // Clear the Authorization header
+        res.setHeader('Authorization', '');
         res.status(200).json({ message: "Logged out successfully" });
-
     } catch (error) {
         console.log("Error in logout controller:", error.message);
         res.status(500).json({ error: "Internal server error" });

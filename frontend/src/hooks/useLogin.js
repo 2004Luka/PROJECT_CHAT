@@ -16,11 +16,16 @@ const useLogin = () => {
             });
 
             const data = await res.json();
-            if (data.error) {
-                throw new Error(data.error);
+
+            if (!res.ok) {
+                throw new Error(data.error || 'Login failed');
             }
 
+            // Store user data and token in localStorage
             localStorage.setItem("chat-user", JSON.stringify(data));
+            localStorage.setItem('token', data.token); // Store the token
+
+            // Set the authenticated user in context
             setAuthUser(data);
         } catch (error) {
             toast.error(error.message);
