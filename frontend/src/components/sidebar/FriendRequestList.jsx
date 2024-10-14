@@ -90,29 +90,32 @@ const FriendRequestList = () => {
 
     return (
         <div>
-            <h3>Pending Friend Requests</h3>
+            <h3 className='text-[var(--text)]'>Pending Friend Requests</h3>
             {loading ? (
                 <span className='loading loading-spinner mx-auto'></span>
             ) : friendRequests.length > 0 ? (
                 friendRequests.map((request) => (
-                    <div key={request.sender._id}>
+                    <div key={request.sender._id}  
+                    className=' text-[var(--text)] grid grid-[3fr,1fr,1fr] border-b-4 border-[var(--background3)] border-opacity-5 '>
                         <span>{request.sender.username}</span>
                         <button 
                             onClick={() => handleRespond(request.sender._id, 'accept')}
                             disabled={respondingTo === request.sender._id}
+                            className='bg-[var(--primary)] hover:bg-[var(--background)] '
                         >
                             {respondingTo === request.sender._id ? 'Accepting...' : 'Accept'}
                         </button>
                         <button 
                             onClick={() => handleRespond(request.sender._id, 'reject')}
                             disabled={respondingTo === request.sender._id}
+                            className='text-[var(--background3)] bg-[var(--background)] hover:bg-[var(--background3)] hover:text-[var(--background)] '
                         >
                             {respondingTo === request.sender._id ? 'Rejecting...' : 'Reject'}
                         </button>
                     </div>
                 ))
             ) : (
-                <p>No friend requests</p>
+                <p className='text-[var(--text)]'>No friend requests</p>
             )}
         </div>
     );

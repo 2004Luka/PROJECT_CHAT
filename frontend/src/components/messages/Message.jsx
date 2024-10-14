@@ -23,7 +23,7 @@ const Message = ({message}) => {
                 />
             </div>
         </div>
-      <div className={`chat-bubble text-[var(--text)] max-w-xs break-words ${bubbleBgColor}`}>{message.message}</div>
+      <div className={`chat-bubble text-[var(--text)] w-auto  break-words ${bubbleBgColor}`}>{message.message}</div>
       <time className="text-xs opacity-50">{formattedTime}</time>
     </div>
   )
