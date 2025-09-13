@@ -7,7 +7,7 @@ import { useAuthContext } from './context/AuthContext';
 function App() {
   const {authUser}=useAuthContext();
   return (
-      <div className='lg:p-10 h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-green-900 to-teal-900 min-h-screen relative overflow-hidden'>
+      <div className='lg:p-10 h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-green-900 to-teal-900 min-h-screen relative overflow-hidden p-0 sm:p-4'>
         <div className='absolute inset-0 bg-gradient-radial from-green-500/10 via-transparent to-transparent pointer-events-none' />
         <div className='absolute inset-0 bg-gradient-radial from-teal-500/10 via-transparent to-transparent pointer-events-none [background-position:80%_20%]' />
         <div className='absolute inset-0 bg-gradient-radial from-lime-500/10 via-transparent to-transparent pointer-events-none [background-position:40%_40%]' />

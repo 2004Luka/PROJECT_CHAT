@@ -14,16 +14,16 @@ const Login = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-center min-w-96 mx-auto animate-fade-in-up'>
-            <div className='w-full p-8 rounded-3xl bg-slate-800/80 backdrop-blur-xl border border-green-500/20 shadow-2xl shadow-green-500/20'>
-                <h1 className='text-5xl font-bold text-center mb-8'>
+        <div className='flex flex-col items-center justify-center min-w-96 mx-auto animate-fade-in-up h-full'>
+            <div className='w-full p-4 sm:p-8 rounded-none sm:rounded-3xl bg-slate-800/80 backdrop-blur-xl border border-green-500/20 shadow-2xl shadow-green-500/20 h-full sm:h-auto flex flex-col justify-center'>
+                <h1 className='text-3xl sm:text-5xl font-bold text-center mb-4 sm:mb-8'>
                     <span className='text-white'>Login to</span>
-                    <span className='ml-3 bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent'>
+                    <span className='ml-2 sm:ml-3 bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent'>
                         CS Chat
                     </span>
                 </h1>
 
-                <form onSubmit={handleSubmit} className='space-y-6'>
+                <form onSubmit={handleSubmit} className='space-y-4 sm:space-y-6'>
                     <div>
                         <label className='block text-sm font-medium text-gray-300 mb-2'>
                             Username

@@ -24,17 +24,17 @@ const SignUp = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-      <div className='w-full p-6 rounded-lg shadow-2xl shadow-green-500/20 bg-slate-800/80 backdrop-blur-xl border border-green-500/20'>
-        <h1 className='text-3xl font-semibold text-center bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent'>
+    <div className='flex flex-col items-center justify-center min-w-96 mx-auto h-full'>
+      <div className='w-full p-4 sm:p-6 rounded-none sm:rounded-lg shadow-2xl shadow-green-500/20 bg-slate-800/80 backdrop-blur-xl border border-green-500/20 h-full sm:h-auto flex flex-col justify-center'>
+        <h1 className='text-2xl sm:text-3xl font-semibold text-center bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent mb-4 sm:mb-6'>
           Sign up
           <span className='text-green-400'> CS</span>
         </h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='space-y-3 sm:space-y-4'>
           <div>
-            <label className='block p-2'>
-              <span className='text-base text-green-300'>Full Name</span>
+            <label className='block p-1 sm:p-2'>
+              <span className='text-sm sm:text-base text-green-300'>Full Name</span>
             </label>
             <input
               type="text"
@@ -46,8 +46,8 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label className='block p-2'>
-              <span className='text-base text-green-300'>Username</span>
+            <label className='block p-1 sm:p-2'>
+              <span className='text-sm sm:text-base text-green-300'>Username</span>
             </label>
             <input
               type="text"
@@ -59,8 +59,8 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label className='block p-2'>
-              <span className='text-base text-green-300'>Password</span>
+            <label className='block p-1 sm:p-2'>
+              <span className='text-sm sm:text-base text-green-300'>Password</span>
             </label>
             <input
               type="password"
@@ -72,8 +72,8 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label className='block p-2'>
-              <span className='text-base text-green-300'>Confirm Password</span>
+            <label className='block p-1 sm:p-2'>
+              <span className='text-sm sm:text-base text-green-300'>Confirm Password</span>
             </label>
             <input
               type="password"

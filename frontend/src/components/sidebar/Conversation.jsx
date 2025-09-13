@@ -30,7 +30,8 @@ const Conversation = ({ conversation, lastIdx }) => {
                     ${isFriend ? "cursor-pointer hover:bg-green-500/20" : "cursor-default opacity-75"}`}
                 onClick={() => isFriend && setSelectedConversation(conversation)}
             >
-                <div className='relative flex-shrink-0'>
+                {/* Profile Picture - Right Side */}
+                <div className='relative flex-shrink-0 ml-auto'>
                     <div className="w-12 h-12 rounded-full border-2 border-green-500/30 overflow-hidden">
                         {conversation.profilePic ? (
                             <img 
@@ -51,21 +52,23 @@ const Conversation = ({ conversation, lastIdx }) => {
                     )}
                 </div>
 
-                <div className='flex flex-col flex-1 min-w-0'>
-                    <div className='flex items-center justify-between'>
-                        <p className='font-semibold text-green-100 truncate'>{conversation.fullName}</p>
+                {/* User Info - Center Right */}
+                <div className='flex flex-col flex-1 min-w-0 text-right'>
+                    <div className='flex items-center justify-end gap-2'>
                         {isOnline && (
                             <div className='flex items-center gap-1 text-green-400 text-xs'>
                                 <FaCircle className='text-green-500' />
                                 <span className='hidden md:inline'>Online</span>
                             </div>
                         )}
+                        <p className='font-semibold text-green-100 truncate'>{conversation.fullName}</p>
                     </div>
                     <p className='text-green-400/70 text-sm truncate'>
                         @{conversation.username}
                     </p>
                 </div>
 
+                {/* Friend Button - Left Side */}
                 <div className='flex-shrink-0' onClick={(e) => e.stopPropagation()}>
                     {isFriend ? (
                         <div className='flex items-center gap-1 text-green-400 text-sm'>

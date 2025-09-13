@@ -60,7 +60,11 @@ const MessageContainer = () => {
     <div className='flex flex-col h-full bg-gradient-to-br from-green-900/20 to-teal-900/30 backdrop-blur-sm'>
       {/* Header */}
       <div className='bg-gradient-to-r from-green-500 to-teal-500 shadow-green-500/30 p-4 border-b border-green-500/20 flex-shrink-0'>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center justify-end gap-3'>
+          <div className='flex-1 min-w-0 text-right'>
+            <h3 className='text-white font-semibold truncate'>{recipientInfo?.name}</h3>
+            <p className='text-green-100 text-sm truncate'>@{recipientInfo?.username}</p>
+          </div>
           <div className='w-10 h-10 rounded-full border-2 border-white/30 overflow-hidden shadow-lg shadow-green-500/30'>
             {recipientInfo?.profilePic ? (
               <img 
@@ -75,10 +79,6 @@ const MessageContainer = () => {
                 </span>
               </div>
             )}
-          </div>
-          <div className='flex-1 min-w-0'>
-            <h3 className='text-white font-semibold truncate'>{recipientInfo?.name}</h3>
-            <p className='text-green-100 text-sm truncate'>@{recipientInfo?.username}</p>
           </div>
         </div>
       </div>

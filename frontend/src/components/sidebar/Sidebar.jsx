@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import LogoutButton from './LogoutButton';
 import FriendList from './FriendList';
-import { FaUserFriends, FaComments } from "react-icons/fa";
+import { FaUserFriends, FaComments, FaTimes } from "react-icons/fa";
 import FriendRequestsSidebar from './sidebars/FriendRequestsSidebar.jsx'; 
 import ConversationsSidebar from './sidebars/ConversationsSidebar.jsx'; 
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const [isFriendRequestsOpen, setIsFriendRequestsOpen] = useState(false);
   const [isConversationsOpen, setIsConversationsOpen] = useState(false);
 
@@ -20,7 +20,16 @@ const Sidebar = () => {
   return (
     <div className='flex flex-col h-full w-full bg-slate-800/90 backdrop-blur-xl'>
       {/* Header with CS-themed title */}
-      <div className='p-4 sm:p-6 text-center border-b border-green-500/20'>
+      <div className='p-4 sm:p-6 text-center border-b border-green-500/20 relative'>
+        {/* Mobile Close Button */}
+        {onClose && (
+          <button
+            onClick={onClose}
+            className='absolute top-4 right-4 p-2 bg-green-500/90 backdrop-blur-sm text-white rounded-lg shadow-lg hover:bg-green-600 transition-all duration-300 sm:hidden'
+          >
+            <FaTimes className='w-4 h-4' />
+          </button>
+        )}
         <h2 className='text-xl sm:text-2xl font-bold text-green-400 mb-2'>CS Chat</h2>
         <div className='h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent'></div>
       </div>
