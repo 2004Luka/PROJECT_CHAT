@@ -1,5 +1,5 @@
 import React from 'react';
-import { CiLogout } from "react-icons/ci";
+import { FaSignOutAlt, FaSpinner } from "react-icons/fa";
 import useLogout from '../../hooks/useLogout';
 
 const LogoutButton = () => {
@@ -7,15 +7,24 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     await logout();
-    localStorage.removeItem('token'); // Add this line
+    localStorage.removeItem('token');
   };
 
   return (
-    <div className=''>
+    <div>
       {!loading ? (
-        <CiLogout className='w-6 h-6 text-white cursor-pointer bg-transparent' onClick={handleLogout} />
+        <button 
+          className='w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-red-500/25 font-medium'
+          onClick={handleLogout}
+        >
+          <FaSignOutAlt className='w-4 h-4' />
+          <span>Logout</span>
+        </button>
       ) : (
-        <span className='loading loading-spinner'></span>
+        <div className='w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-500/50 rounded-lg'>
+          <FaSpinner className='w-4 h-4 animate-spin' />
+          <span className='font-medium'>Logging out...</span>
+        </div>
       )}
     </div>
   );

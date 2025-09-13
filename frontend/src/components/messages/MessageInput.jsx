@@ -17,20 +17,28 @@ const MessageInput = () => {
   }
 
   return (
-    <form className='px-4 my-3 flex flex-row items-center sm:gap-1 md:gap-3' onSubmit={handleSubmit}>
+    <form className='flex flex-row items-center gap-3' onSubmit={handleSubmit}>
         <div className='w-full relative'>
-            <input type="text" className='border text-sm rounded-lg block w-full p-2.5 bg-[var(--background)] border-[var(--secondary)] text-[var(--text)] font-bold' 
-            placeholder='Type...'
-            value={message}
-            onChange={(e)=> setMessage(e.target.value)}
+            <input 
+              type="text" 
+              className='w-full h-12 pr-12 rounded-xl px-4 text-white placeholder-green-300 bg-green-500/5 backdrop-blur-sm border border-green-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' 
+              placeholder='Type your message...'
+              value={message}
+              onChange={(e)=> setMessage(e.target.value)}
             />
         </div>
 
-            <button type='submit' className='h-[5vh] w-[3rem] bg-[var(--primary)] flex items-center justify-center rounded-lg'>
-              {loading?<div className='loading loading-spinner'>
-              </div>:
-              <IoSend className="text-[var(--text)] h-[3vh] w-[3vh] hover:text-[var(--background4)] transition duration-300 ml-1" />}
-            </button>
+        <button 
+          type='submit' 
+          className='h-12 w-12 flex items-center justify-center rounded-xl shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-green-500 to-teal-500 shadow-green-500/30'
+          disabled={loading || !message.trim()}
+        >
+          {loading ? (
+            <div className='w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
+          ) : (
+            <IoSend className="text-white h-5 w-5" />
+          )}
+        </button>
     </form>
   )
 }

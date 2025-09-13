@@ -9,22 +9,35 @@ const Message = ({message}) => {
   const fromMe = message.senderId === authUser._id;
   const chatClassName = fromMe? 'chat-end':'chat-start';
   const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
-  const bubbleBgColor = fromMe? 'bg-[var(--primary)]': "bg-[var(--background4)]";
+  const bubbleBgColor = fromMe? 'bg-gradient-to-r from-green-500 to-teal-600': "bg-teal-900/30";
   const formattedTime = extractTime(message.createdAt);
 
 
   return (
-    <div className={`chat ${chatClassName}`}>
-        <div className='chat-image avatar'>
-            <div className='w-10 rounded-full '>
+    <div className={`flex ${fromMe ? 'justify-end' : 'justify-start'} mb-4 animate-fade-in-up`}>
+        <div className={`flex items-end gap-2 max-w-[70%] ${fromMe ? 'flex-row-reverse' : 'flex-row'}`}>
+            <div className='w-8 h-8 flex-shrink-0 rounded-full border-2 border-green-500/30 shadow-lg shadow-green-500/30'>
                 <img
-                    alt='Tailwind CSS chat bubble component'
+                    alt='User avatar'
                     src={profilePic}
+                    className='w-full h-full rounded-full object-cover'
                 />
             </div>
+            <div className='flex flex-col'>
+                <div 
+                  className={`max-w-full px-4 py-2 rounded-2xl text-sm font-medium animate-fade-in-up ${
+                    fromMe 
+                      ? 'bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-br-md' 
+                      : 'bg-teal-900/30 text-teal-100 border border-teal-500/20 rounded-bl-md'
+                  }`}
+                >
+                    {message.message}
+                </div>
+                <time className={`text-xs text-teal-400 mt-1 ${fromMe ? 'text-right' : 'text-left'}`}>
+                    {formattedTime}
+                </time>
+            </div>
         </div>
-      <div className={`chat-bubble text-[var(--text)] w-auto  break-words ${bubbleBgColor}`}>{message.message}</div>
-      <time className="text-xs opacity-50">{formattedTime}</time>
     </div>
   )
 }
