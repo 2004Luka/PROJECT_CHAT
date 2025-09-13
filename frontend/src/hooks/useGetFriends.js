@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import config from '../config/config';
 
 const useGetFriends = () => {
   const [friends, setFriends] = useState([]);
@@ -24,7 +25,7 @@ const useGetFriends = () => {
           throw new Error('No authentication token found');
         }
 
-        const res = await fetch(`/api/friends/${authUser._id}/friends`, {
+        const res = await fetch(`${config.API_BASE_URL}/api/friends/${authUser._id}/friends`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

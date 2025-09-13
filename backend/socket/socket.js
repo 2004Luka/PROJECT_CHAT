@@ -7,8 +7,11 @@ const app = express();
 const server = http.createServer(app);
 const io =new Server(server,{
     cors:{
-        origin:["http://localhost:3000"],
-        methods:["GET","POST"]
+        origin: process.env.NODE_ENV === "production" 
+            ? [process.env.CLIENT_URL] 
+            : ["http://localhost:3000", "http://localhost:5000"],
+        methods:["GET","POST"],
+        credentials: true
     }
 });
 

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useSocketContext } from '../context/SocketContext'; // Import the SocketContext
+import config from '../config/config';
 
 const useGetFriendRequests = (authUserId) => {
     const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ const useGetFriendRequests = (authUserId) => {
         setLoading(true);
         try {
             console.log('Fetching friend requests for user:', authUserId);
-            const res = await fetch(`/api/friends/requests/${authUserId}`);
+            const res = await fetch(`${config.API_BASE_URL}/api/friends/requests/${authUserId}`);
 
             console.log('Response status:', res.status);
             if (!res.ok) {
