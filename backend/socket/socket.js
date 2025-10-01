@@ -20,7 +20,7 @@ export const getRecieverSocketId=(receiverId)=>{
 }
 
 
-const userSocketMap={};//{userId:socketId}
+const userSocketMap={};
 
 io.on('connection',(socket)=>{
     console.log("a user connected",socket.id)
@@ -29,9 +29,7 @@ io.on('connection',(socket)=>{
     if(userId) userSocketMap[userId]=socket.id;
     io.emit("getOnlineUsers",Object.keys(userSocketMap));
 
-    // Listen for friend request events
     socket.on('sendFriendRequest', (data) => {
-        // Broadcast the friend request to the recipient
         socket.to(data.recipientId).emit('friendRequestReceived', {
             senderId: socket.id,
             senderName: data.senderName,
@@ -39,9 +37,7 @@ io.on('connection',(socket)=>{
         });
     });
 
-    // Listen for responses to friend requests
     socket.on('respondToFriendRequest', (data) => {
-        // Notify the sender of the response
         socket.to(data.senderId).emit('friendRequestResponse', {
             recipientId: socket.id,
             response: data.response

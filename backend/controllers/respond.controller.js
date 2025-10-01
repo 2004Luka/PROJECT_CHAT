@@ -1,8 +1,8 @@
-import User from '../models/user.model.js'; // Import the User model
-import { io } from '../socket/socket.js'; // Adjust the path as needed
+import User from '../models/user.model.js';
+import { io } from '../socket/socket.js';
 
 export const respondController = async (req, res) => {
-    const { receiverId, senderId, action } = req.body; // action can be 'accept' or 'reject'
+    const { receiverId, senderId, action } = req.body; 
 
     try {
         const receiver = await User.findById(receiverId);
@@ -30,7 +30,6 @@ export const respondController = async (req, res) => {
             return res.status(400).json({ error: 'Invalid action' });
         }
 
-        // Remove the friend request from the array
         receiver.friendRequests.splice(requestIndex, 1);
 
         await receiver.save();

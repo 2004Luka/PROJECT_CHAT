@@ -9,9 +9,9 @@ const Conversations = () => {
   return (
     <div className='flex flex-col h-full'>
       {/* Header */}
-      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-green-500/20'>
-        <FaComments className='text-green-400 text-lg' />
-        <h3 className='text-green-300 font-semibold'>People ({conversations.length})</h3>
+      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-white/10'>
+        <FaComments className='text-white/80 text-lg' />
+        <h3 className='text-white/80 font-semibold'>People ({conversations.length})</h3>
       </div>
 
       {/* Conversations List */}
@@ -26,16 +26,16 @@ const Conversations = () => {
         
         {loading && (
           <div className='flex flex-col items-center justify-center py-8'>
-            <FaSpinner className='text-green-400 text-2xl animate-spin mb-2' />
-            <p className='text-green-300 text-sm'>Loading people...</p>
+            <FaSpinner className='text-white/60 text-2xl mb-2' />
+            <p className='text-white/70 text-sm'>Loading people...</p>
           </div>
         )}
         
         {!loading && conversations.length === 0 && (
           <div className='text-center py-8'>
-            <FaComments className='text-green-400/50 text-4xl mx-auto mb-3' />
-            <p className='text-green-300 text-lg font-medium'>No people found</p>
-            <p className='text-green-400/70 text-sm mt-1'>Add friends to start chatting!</p>
+            <FaComments className='text-white/40 text-4xl mx-auto mb-3' />
+            <p className='text-white/80 text-lg font-medium'>No people found</p>
+            <p className='text-white/60 text-sm mt-1'>Add friends to start chatting!</p>
           </div>
         )}
       </div>

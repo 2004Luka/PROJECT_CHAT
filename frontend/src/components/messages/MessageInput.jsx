@@ -21,7 +21,7 @@ const MessageInput = () => {
         <div className='w-full relative'>
             <input 
               type="text" 
-              className='w-full h-12 pr-12 rounded-xl px-4 text-white placeholder-green-300 bg-green-500/5 backdrop-blur-sm border border-green-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent' 
+              className='w-full h-12 pr-12 rounded-xl px-4 text-white placeholder-white/50 bg-white/5 backdrop-blur-sm border border-white/10 focus:outline-none focus:ring-0' 
               placeholder='Type your message...'
               value={message}
               onChange={(e)=> setMessage(e.target.value)}
@@ -30,11 +30,11 @@ const MessageInput = () => {
 
         <button 
           type='submit' 
-          className='h-12 w-12 flex items-center justify-center rounded-xl shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-green-500 to-teal-500 shadow-green-500/30'
+          className='h-12 w-12 flex items-center justify-center rounded-xl disabled:opacity-50 disabled:cursor-not-allowed bg-white/10 border border-white/10'
           disabled={loading || !message.trim()}
         >
           {loading ? (
-            <div className='w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin'></div>
+            <div className='w-5 h-5 border-2 border-white/30 border-t-white rounded-full'></div>
           ) : (
             <IoSend className="text-white h-5 w-5" />
           )}

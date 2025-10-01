@@ -10,17 +10,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-800 rounded-lg;
+  @apply bg-transparent rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-green-500 to-teal-500 rounded-lg border-2 border-slate-800 transition-all duration-300;
+  @apply bg-white/20 rounded-lg border border-white/10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply from-green-400 to-teal-400 scale-110;
+  @apply bg-white/30;
 }
 
 ::-webkit-scrollbar-corner {
-  @apply bg-slate-800;
+  @apply bg-transparent;
 }

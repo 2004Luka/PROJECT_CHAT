@@ -26,22 +26,20 @@ const Home = () => {
       {isMobile && !showSidebar && (
         <button
           onClick={toggleSidebar}
-          className='fixed top-4 left-4 z-50 p-2 bg-green-800 backdrop-blur-sm text-white rounded-lg shadow-lg hover:bg-green-600 transition-all duration-300'
+          className='fixed top-4 left-4 z-50 p-2 text-white rounded-lg bg-white/10 backdrop-blur-xxl border border-white/10'
         >
           <FaBars className='w-5 h-5' />
         </button>
       )}
 
-      <div className='flex h-screen w-full bg-slate-800/80 backdrop-blur-xl relative overflow-hidden rounded-none sm:rounded-3xl border border-green-500/20 shadow-2xl shadow-green-500/20'>
+      <div className='flex h-screen w-full bg-white/5 backdrop-blur-xl relative overflow-hidden rounded-none sm:rounded-3xl border border-white/10'>
         {/* Sidebar */}
         <div className={`
           ${isMobile 
-            ? `fixed inset-y-0 left-0 z-40 w-80 transform transition-transform duration-300 ease-in-out ${
-                showSidebar ? 'translate-x-0' : '-translate-x-full'
-              }` 
+            ? `fixed inset-y-0 left-0 z-40 w-80 ${showSidebar ? '' : 'hidden'}` 
             : 'w-80 flex-shrink-0'
           }
-          h-full border-r border-green-500/20
+          h-full border-r border-white/10
         `}>
           <Sidebar onClose={isMobile ? toggleSidebar : null} />
         </div>
@@ -49,7 +47,7 @@ const Home = () => {
         {/* Mobile Overlay */}
         {isMobile && showSidebar && (
           <div 
-            className='fixed inset-0 bg-black bg-opacity-50 z-30 '
+            className='fixed inset-0 bg-black/60 backdrop-blur-sm z-30'
             onClick={toggleSidebar}
           />
         )}

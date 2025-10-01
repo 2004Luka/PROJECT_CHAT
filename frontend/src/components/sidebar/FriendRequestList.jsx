@@ -76,23 +76,23 @@ const FriendRequestList = () => {
     return (
         <div className='flex flex-col h-full'>
             {/* Header */}
-            <div className='flex items-center gap-2 mb-4 pb-2 border-b border-green-500/20'>
-                <FaUserClock className='text-green-400 text-lg' />
-                <h3 className='text-green-300 font-semibold'>Friend Requests ({friendRequests.length})</h3>
+            <div className='flex items-center gap-2 mb-4 pb-2 border-b border-white/10'>
+                <FaUserClock className='text-white/80 text-lg' />
+                <h3 className='text-white/80 font-semibold'>Friend Requests ({friendRequests.length})</h3>
             </div>
 
             {/* Requests List */}
             <div className='flex-1 overflow-y-auto space-y-3'>
                 {loading ? (
                     <div className='flex flex-col items-center justify-center py-8'>
-                        <FaSpinner className='text-green-400 text-2xl animate-spin mb-2' />
-                        <p className='text-green-300 text-sm'>Loading requests...</p>
+                        <FaSpinner className='text-white/60 text-2xl mb-2' />
+                        <p className='text-white/70 text-sm'>Loading requests...</p>
                     </div>
                 ) : friendRequests.length > 0 ? (
                     friendRequests.map((request) => (
-                        <div key={request.sender._id} className='bg-slate-800/50 border border-green-500/20 rounded-lg p-4 hover:bg-slate-800/70 transition-all duration-300'>
+                        <div key={request.sender._id} className='bg-white/5 border border-white/10 rounded-lg p-4'>
                             <div className='flex items-center gap-3 mb-3'>
-                                <div className='w-10 h-10 rounded-full border-2 border-green-500/30 overflow-hidden'>
+                                <div className='w-10 h-10 rounded-full border-2 border-white/20 overflow-hidden'>
                                     {request.sender.profilePic ? (
                                         <img 
                                             src={request.sender.profilePic} 
@@ -100,14 +100,14 @@ const FriendRequestList = () => {
                                             className='w-full h-full object-cover'
                                         />
                                     ) : (
-                                        <div className='w-full h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center'>
+                                        <div className='w-full h-full bg-white/10 flex items-center justify-center'>
                                             <FaUserPlus className='text-white text-sm' />
                                         </div>
                                     )}
                                 </div>
                                 <div className='flex-1 min-w-0'>
-                                    <p className='text-green-100 font-medium truncate'>{request.sender.fullName || request.sender.username}</p>
-                                    <p className='text-green-400/70 text-sm truncate'>@{request.sender.username}</p>
+                                    <p className='text-white font-medium truncate'>{request.sender.fullName || request.sender.username}</p>
+                                    <p className='text-white/70 text-sm truncate'>@{request.sender.username}</p>
                                 </div>
                             </div>
                             
@@ -115,11 +115,11 @@ const FriendRequestList = () => {
                                 <button 
                                     onClick={() => handleRespond(request.sender._id, 'accept')}
                                     disabled={respondingTo === request.sender._id}
-                                    className='flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 disabled:from-green-400 disabled:to-teal-400 text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 shadow-lg shadow-green-500/30 disabled:cursor-not-allowed'
+                                    className='flex-1 flex items-center justify-center gap-2 bg-white/10 text-white px-3 py-2 rounded-md text-sm font-medium border border-white/10 disabled:cursor-not-allowed'
                                 >
                                     {respondingTo === request.sender._id ? (
                                         <>
-                                            <FaSpinner className='animate-spin' />
+                                            <FaSpinner />
                                             <span>Accepting...</span>
                                         </>
                                     ) : (
@@ -132,11 +132,11 @@ const FriendRequestList = () => {
                                 <button 
                                     onClick={() => handleRespond(request.sender._id, 'reject')}
                                     disabled={respondingTo === request.sender._id}
-                                    className='flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50'
+                                    className='flex-1 flex items-center justify-center gap-2 bg-white/5 text-white/80 px-3 py-2 rounded-md text-sm font-medium border border-white/10 disabled:cursor-not-allowed disabled:opacity-50'
                                 >
                                     {respondingTo === request.sender._id ? (
                                         <>
-                                            <FaSpinner className='animate-spin' />
+                                            <FaSpinner />
                                             <span>Rejecting...</span>
                                         </>
                                     ) : (
@@ -151,9 +151,9 @@ const FriendRequestList = () => {
                     ))
                 ) : (
                     <div className='text-center py-8'>
-                        <FaUserClock className='text-green-400/50 text-4xl mx-auto mb-3' />
-                        <p className='text-green-300 text-lg font-medium'>No pending requests</p>
-                        <p className='text-green-400/70 text-sm mt-1'>All caught up!</p>
+                        <FaUserClock className='text-white/40 text-4xl mx-auto mb-3' />
+                        <p className='text-white/80 text-lg font-medium'>No pending requests</p>
+                        <p className='text-white/60 text-sm mt-1'>All caught up!</p>
                     </div>
                 )}
             </div>

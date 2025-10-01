@@ -48,26 +48,26 @@ const SearchInput = () => {
     return (
         <div className='relative'>
             <div className='relative'>
-                <FaSearch className='absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 text-sm' />
+                <FaSearch className='absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70 text-sm' />
                 <input 
                     type="text" 
                     placeholder='Search users...' 
-                    className='w-full h-10 pl-10 pr-3 py-2 bg-green-500/5 backdrop-blur-sm border border-green-500/20 rounded-lg text-green-100 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm' 
+                    className='w-full h-10 pl-10 pr-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0 text-sm' 
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
             {searchResults.length > 0 && (
-                <div className='absolute z-10 w-full mt-2 bg-slate-800/95 backdrop-blur-xl border border-green-500/20 rounded-lg max-h-60 overflow-y-auto shadow-xl shadow-green-500/10'>
+                <div className='absolute z-10 w-full mt-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg max-h-60 overflow-y-auto'>
                     {searchResults.map((item) => (
                         <div 
                             key={item._id} 
-                            className={`p-3 flex items-center justify-between text-green-100 border-b border-green-500/10 last:border-b-0
-                                ${isFriend(item) ? 'hover:bg-green-500/20 cursor-pointer' : 'cursor-default opacity-75'}`}
+                            className={`p-3 flex items-center justify-between text-white border-b border-white/10 last:border-b-0
+                                ${isFriend(item) ? 'cursor-pointer' : 'cursor-default opacity-75'}`}
                             onClick={() => isFriend(item) && handleItemClick(item)}
                         >
                             <div className='flex items-center gap-3'>
-                                <div className='w-10 h-10 rounded-full border-2 border-green-500/30 overflow-hidden'>
+                                <div className='w-10 h-10 rounded-full border-2 border-white/20 overflow-hidden'>
                                     {item.profilePic ? (
                                         <img 
                                             src={item.profilePic} 
@@ -75,19 +75,19 @@ const SearchInput = () => {
                                             className='w-full h-full object-cover'
                                         />
                                     ) : (
-                                        <div className='w-full h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center'>
+                                        <div className='w-full h-full bg-white/10 flex items-center justify-center'>
                                             <FaUser className='text-white text-sm' />
                                         </div>
                                     )}
                                 </div>
                                 <div className='flex flex-col'>
                                     <span className='font-medium'>{item.fullName || item.username}</span>
-                                    <span className='text-green-400/70 text-sm'>@{item.username}</span>
+                                    <span className='text-white/70 text-sm'>@{item.username}</span>
                                 </div>
                             </div>
                                 {item._id !== authUser._id && (
                                 isFriend(item) ? (
-                                    <div className='flex items-center gap-1 text-green-400 text-sm'>
+                                    <div className='flex items-center gap-1 text-white/80 text-sm'>
                                         <FaUserCheck />
                                         <span className='hidden md:inline'>Friends</span>
                                     </div>

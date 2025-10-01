@@ -25,14 +25,14 @@ const Conversation = ({ conversation, lastIdx }) => {
         <>
             <div
                 className={`flex gap-3 items-center rounded-lg p-3 
-                            min-h-[60px] w-full border-b border-green-500/20 transition-all duration-300
-                    ${isSelected ? "bg-green-500/30 border-green-500/50" : ""}
-                    ${isFriend ? "cursor-pointer hover:bg-green-500/20" : "cursor-default opacity-75"}`}
+                            min-h-[60px] w-full border-b border-white/10
+                    ${isSelected ? "bg-white/10" : ""}
+                    ${isFriend ? "cursor-pointer" : "cursor-default opacity-75"}`}
                 onClick={() => isFriend && setSelectedConversation(conversation)}
             >
                 {/* Profile Picture - Right Side */}
                 <div className='relative flex-shrink-0 ml-auto'>
-                    <div className="w-12 h-12 rounded-full border-2 border-green-500/30 overflow-hidden">
+                    <div className="w-12 h-12 rounded-full border-2 border-white/20 overflow-hidden">
                         {conversation.profilePic ? (
                             <img 
                                 src={conversation.profilePic} 
@@ -40,14 +40,14 @@ const Conversation = ({ conversation, lastIdx }) => {
                                 className='w-full h-full object-cover'
                             />
                         ) : (
-                            <div className='w-full h-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center'>
+                            <div className='w-full h-full bg-white/10 flex items-center justify-center'>
                                 <FaUser className='text-white text-lg' />
                             </div>
                         )}
                     </div>
                     {isOnline && (
-                        <div className='absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-800 flex items-center justify-center'>
-                            <FaCircle className='text-green-400 text-xs' />
+                        <div className='absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-800 flex items-center justify-center'>
+                            <FaCircle className='text-emerald-300 text-xs' />
                         </div>
                     )}
                 </div>
@@ -56,14 +56,14 @@ const Conversation = ({ conversation, lastIdx }) => {
                 <div className='flex flex-col flex-1 min-w-0 text-right'>
                     <div className='flex items-center justify-end gap-2'>
                         {isOnline && (
-                            <div className='flex items-center gap-1 text-green-400 text-xs'>
-                                <FaCircle className='text-green-500' />
+                            <div className='flex items-center gap-1 text-white/70 text-xs'>
+                                <FaCircle className='text-emerald-400' />
                                 <span className='hidden md:inline'>Online</span>
                             </div>
                         )}
-                        <p className='font-semibold text-green-100 truncate'>{conversation.fullName}</p>
+                        <p className='font-semibold text-white truncate'>{conversation.fullName}</p>
                     </div>
-                    <p className='text-green-400/70 text-sm truncate'>
+                    <p className='text-white/70 text-sm truncate'>
                         @{conversation.username}
                     </p>
                 </div>
@@ -71,7 +71,7 @@ const Conversation = ({ conversation, lastIdx }) => {
                 {/* Friend Button - Left Side */}
                 <div className='flex-shrink-0' onClick={(e) => e.stopPropagation()}>
                     {isFriend ? (
-                        <div className='flex items-center gap-1 text-green-400 text-sm'>
+                        <div className='flex items-center gap-1 text-white/80 text-sm'>
                             <FaUserCheck />
                             <span className='hidden md:inline'>Friends</span>
                         </div>

@@ -25,21 +25,20 @@ const SignUp = () => {
 
   return (
     <div className='flex flex-col items-center justify-center min-w-96 mx-auto h-full'>
-      <div className='w-full p-4 sm:p-6 rounded-none sm:rounded-lg shadow-2xl shadow-green-500/20 bg-slate-800/80 backdrop-blur-xl border border-green-500/20 h-full sm:h-auto flex flex-col justify-center'>
-        <h1 className='text-2xl sm:text-3xl font-semibold text-center bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent mb-4 sm:mb-6'>
-          Sign up
-          <span className='text-green-400'> CS</span>
+      <div className='w-full p-4 sm:p-6 rounded-none sm:rounded-lg bg-white/5 backdrop-blur-xl border border-white/10 h-full sm:h-auto flex flex-col justify-center'>
+        <h1 className='text-2xl sm:text-3xl font-semibold text-center text-white mb-4 sm:mb-6'>
+          Sign up <span className='text-white/80'>CS</span>
         </h1>
 
         <form onSubmit={handleSubmit} className='space-y-3 sm:space-y-4'>
           <div>
             <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-green-300'>Full Name</span>
+              <span className='text-sm sm:text-base text-white/70'>Full Name</span>
             </label>
             <input
               type="text"
               placeholder='John Smith'
-              className='w-full h-10 px-3 py-2 bg-green-500/5 backdrop-blur-sm border border-green-500/20 rounded-lg text-green-100 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+              className='w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0'
               value={inputs.fullName}
               onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
             />
@@ -47,12 +46,12 @@ const SignUp = () => {
 
           <div>
             <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-green-300'>Username</span>
+              <span className='text-sm sm:text-base text-white/70'>Username</span>
             </label>
             <input
               type="text"
               placeholder='Username'
-              className='w-full h-10 px-3 py-2 bg-green-500/5 backdrop-blur-sm border border-green-500/20 rounded-lg text-green-100 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+              className='w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0'
               value={inputs.username}
               onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
@@ -60,11 +59,11 @@ const SignUp = () => {
 
           <div>
             <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-green-300'>Password</span>
+              <span className='text-sm sm:text-base text-white/70'>Password</span>
             </label>
             <input
               type="password"
-              className="w-full h-10 px-3 py-2 bg-green-500/5 backdrop-blur-sm border border-green-500/20 rounded-lg text-green-100 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0"
               placeholder='Enter Password'
               value={inputs.password}
               onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
@@ -73,11 +72,11 @@ const SignUp = () => {
 
           <div>
             <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-green-300'>Confirm Password</span>
+              <span className='text-sm sm:text-base text-white/70'>Confirm Password</span>
             </label>
             <input
               type="password"
-              className="w-full h-10 px-3 py-2 bg-green-500/5 backdrop-blur-sm border border-green-500/20 rounded-lg text-green-100 placeholder-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0"
               placeholder='Confirm Password'
               value={inputs.confirmPassword}
               onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
@@ -86,15 +85,15 @@ const SignUp = () => {
 
           <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-          <Link to="/login" className='text-sm hover:underline hover:text-green-400 mt-2 inline-block text-green-300'>
+          <Link to="/login" className='text-sm mt-2 inline-block text-white/70'>
             Already have an account?
           </Link>
 
           <div>
-            <button className='w-full mt-2 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed' type='submit'
+            <button className='w-full mt-2 bg-white/10 text-white font-bold py-2 px-4 rounded-lg border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed' type='submit'
             disabled={loading}
             >
-                {loading ? <span className='animate-spin'>⏳</span>:"Sign Up"}
+                {loading ? <span>⏳</span>:"Sign Up"}
             </button>
           </div>
         </form>

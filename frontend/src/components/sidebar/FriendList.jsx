@@ -36,9 +36,9 @@ const FriendsList = () => {
   return (
     <div className='flex flex-col h-full'>
       {/* Header */}
-      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-green-500/20'>
-        <FaUserFriends className='text-green-400 text-lg' />
-        <h3 className='text-green-300 font-semibold'>Friends ({friends.length})</h3>
+      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-white/10'>
+        <FaUserFriends className='text-white/80 text-lg' />
+        <h3 className='text-white/80 font-semibold'>Friends ({friends.length})</h3>
       </div>
 
       {/* Friends List */}
@@ -54,8 +54,8 @@ const FriendsList = () => {
         
         {loading && (
           <div className='flex flex-col items-center justify-center py-8'>
-            <FaSpinner className='text-green-400 text-2xl animate-spin mb-2' />
-            <p className='text-green-300 text-sm'>Loading friends...</p>
+            <FaSpinner className='text-white/60 text-2xl mb-2' />
+            <p className='text-white/70 text-sm'>Loading friends...</p>
           </div>
         )}
         
@@ -70,9 +70,9 @@ const FriendsList = () => {
         
         {!loading && !error && friends.length === 0 && (
           <div className='text-center py-8'>
-            <FaUserFriends className='text-green-400/50 text-4xl mx-auto mb-3' />
-            <p className='text-green-300 text-lg font-medium'>No friends yet</p>
-            <p className='text-green-400/70 text-sm mt-1'>Start by adding some friends!</p>
+            <FaUserFriends className='text-white/40 text-4xl mx-auto mb-3' />
+            <p className='text-white/80 text-lg font-medium'>No friends yet</p>
+            <p className='text-white/60 text-sm mt-1'>Start by adding some friends!</p>
           </div>
         )}
       </div>
