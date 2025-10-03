@@ -7,8 +7,7 @@ import { useAuthContext } from './context/AuthContext';
 function App() {
   const {authUser}=useAuthContext();
   return (
-      <div className='h-screen min-h-screen w-full p-0 sm:p-4 flex items-center justify-center bg-gradient-to-b from-emerald-700 to-black bg-fixed'>
-        
+      <div>
         <Routes>
           <Route path='/' element={authUser ? <Home/> : <Navigate to={"/login"}/>} />
           <Route path='/login' element={authUser ? <Navigate to="/"/>:<Login/>} />
@@ -22,7 +21,6 @@ function App() {
               background: 'rgba(30, 41, 59, 0.9)',
               color: '#f8fafc',
               border: '1px solid rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
             },
           }}
         />

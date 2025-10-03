@@ -26,13 +26,13 @@ const Home = () => {
       {isMobile && !showSidebar && (
         <button
           onClick={toggleSidebar}
-          className='fixed top-4 left-4 z-50 p-2 text-white rounded-lg bg-white/10 backdrop-blur-xxl border border-white/10'
+          className='fixed top-4 left-4 z-50 p-2 text-white bg-white/10 backdrop-blur-xxl border border-white/10'
         >
           <FaBars className='w-5 h-5' />
         </button>
       )}
 
-      <div className='flex h-screen w-full bg-white/5 backdrop-blur-xl relative overflow-hidden rounded-none sm:rounded-3xl border border-white/10'>
+      <div className='flex h-screen w-full bg-white/5 backdrop-blur-xl relative overflow-hidden border border-white/10'>
         {/* Sidebar */}
         <div className={`
           ${isMobile 
