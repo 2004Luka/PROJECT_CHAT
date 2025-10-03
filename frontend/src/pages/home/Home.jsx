@@ -36,7 +36,7 @@ const Home = () => {
         {/* Sidebar */}
         <div className={`
           ${isMobile 
-            ? `fixed inset-y-0 left-0 z-40 w-80 ${showSidebar ? '' : 'hidden'}` 
+            ? `fixed inset-y-0 left-0 z-40 w-80 bg-black ${showSidebar ? '' : 'hidden'}` 
             : 'w-80 flex-shrink-0'
           }
           h-full border-r border-white/10
