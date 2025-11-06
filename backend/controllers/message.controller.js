@@ -4,7 +4,7 @@ import { getRecieverSocketId, io } from '../socket/socket.js';
 
 export const sendMessage = async (req, res) => {
     try {
-        const { message } = req.body;
+        const { message, imageUrl, fileUrl, fileName, fileType } = req.body;
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
 
@@ -23,7 +23,11 @@ export const sendMessage = async (req, res) => {
         const newMessage = new Message({
             senderId,
             receiverId,
-            message,
+            message: message || "",
+            imageUrl: imageUrl || null,
+            fileUrl: fileUrl || null,
+            fileName: fileName || null,
+            fileType: fileType || null,
         });
 
         if (newMessage) {

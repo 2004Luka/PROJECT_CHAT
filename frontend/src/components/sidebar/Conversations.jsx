@@ -8,10 +8,10 @@ const Conversations = () => {
 
   return (
     <div className='flex flex-col h-full'>
-      {/* Header */}
-      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-white/10'>
-        <FaComments className='text-white/80 text-lg' />
-        <h3 className='text-white/80 font-semibold'>People ({conversations.length})</h3>
+      {/* Header - High-contrast design */}
+      <div className='flex items-center gap-3 mb-4 pb-3 border-b border-[#333333]'>
+        <FaComments className='text-[#00FF99] text-sm' />
+        <h3 className='text-[#FFFFFF] font-semibold text-sm font-mono'>People ({conversations.length})</h3>
       </div>
 
       {/* Conversations List */}
@@ -25,17 +25,19 @@ const Conversations = () => {
         ))}
         
         {loading && (
-          <div className='flex flex-col items-center justify-center py-8'>
-            <FaSpinner className='text-white/60 text-2xl mb-2' />
-            <p className='text-white/70 text-sm'>Loading people...</p>
+          <div className='flex flex-col items-center justify-center py-12'>
+            <FaSpinner className='text-[#00FF99] text-xl mb-3 animate-spin' />
+            <p className='text-[#999999] text-xs font-mono'>Loading people...</p>
           </div>
         )}
         
         {!loading && conversations.length === 0 && (
-          <div className='text-center py-8'>
-            <FaComments className='text-white/40 text-4xl mx-auto mb-3' />
-            <p className='text-white/80 text-lg font-medium'>No people found</p>
-            <p className='text-white/60 text-sm mt-1'>Add friends to start chatting!</p>
+          <div className='text-center py-12'>
+            <div className='w-12 h-12 mx-auto mb-4 bg-[#111111] border border-[#333333] flex items-center justify-center'>
+              <FaComments className='text-[#666666] text-xl' />
+            </div>
+            <p className='text-[#FFFFFF] font-semibold text-sm mb-1 font-mono'>No people found</p>
+            <p className='text-[#999999] text-xs font-mono'>Add friends to start chatting!</p>
           </div>
         )}
       </div>

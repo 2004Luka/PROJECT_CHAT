@@ -7,54 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Computer Science Green Theme
-        primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-        },
-        secondary: {
-          50: '#f7fee7',
-          100: '#ecfccb',
-          200: '#d9f99d',
-          300: '#bef264',
-          400: '#a3e635',
-          500: '#84cc16',
-          600: '#65a30d',
-          700: '#4d7c0f',
-          800: '#3f6212',
-          900: '#365314',
+        // High-Contrast Dark Mode Palette
+        dark: {
+          bg: '#1E1E1E',
+          surface: '#111111',
+          border: '#333333',
+          hover: '#2A2A2A',
         },
         accent: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          DEFAULT: '#00FF99',
+          hover: '#00E689',
+          dim: 'rgba(0, 255, 153, 0.1)',
         },
-        terminal: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#1a2e1a',
-          900: '#0a0f0a',
+        text: {
+          primary: '#FFFFFF',
+          secondary: '#CCCCCC',
+          muted: '#999999',
         }
       },
       fontFamily: {

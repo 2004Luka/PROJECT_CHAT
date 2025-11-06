@@ -35,10 +35,10 @@ const FriendsList = () => {
 
   return (
     <div className='flex flex-col h-full'>
-      {/* Header */}
-      <div className='flex items-center gap-2 mb-4 pb-2 border-b border-white/10'>
-        <FaUserFriends className='text-white/80 text-lg' />
-        <h3 className='text-white/80 font-semibold'>Friends ({friends.length})</h3>
+      {/* Header - High-contrast design */}
+      <div className='flex items-center gap-3 mb-4 pb-3 border-b border-[#333333]'>
+        <FaUserFriends className='text-[#00FF99] text-sm' />
+        <h3 className='text-[#FFFFFF] font-semibold text-sm font-mono'>Friends ({friends.length})</h3>
       </div>
 
       {/* Friends List */}
@@ -53,26 +53,28 @@ const FriendsList = () => {
         ))}
         
         {loading && (
-          <div className='flex flex-col items-center justify-center py-8'>
-            <FaSpinner className='text-white/60 text-2xl mb-2' />
-            <p className='text-white/70 text-sm'>Loading friends...</p>
+          <div className='flex flex-col items-center justify-center py-12'>
+            <FaSpinner className='text-[#00FF99] text-xl mb-3 animate-spin' />
+            <p className='text-[#999999] text-xs font-mono'>Loading friends...</p>
           </div>
         )}
         
         {!loading && error && (
           <div className='text-center py-8'>
-            <div className='bg-red-900/20 border border-red-500/30 rounded-lg p-4'>
-              <p className='text-red-400 font-medium'>Error loading friends</p>
-              <p className='text-red-300 text-sm mt-1'>{error}</p>
+            <div className='bg-[#111111] border border-[#FF4444] p-4'>
+              <p className='text-[#FF4444] font-semibold text-sm font-mono'>Error loading friends</p>
+              <p className='text-[#FF6666] text-xs mt-1 font-mono'>{error}</p>
             </div>
           </div>
         )}
         
         {!loading && !error && friends.length === 0 && (
-          <div className='text-center py-8'>
-            <FaUserFriends className='text-white/40 text-4xl mx-auto mb-3' />
-            <p className='text-white/80 text-lg font-medium'>No friends yet</p>
-            <p className='text-white/60 text-sm mt-1'>Start by adding some friends!</p>
+          <div className='text-center py-12'>
+            <div className='w-12 h-12 mx-auto mb-4 bg-[#111111] border border-[#333333] flex items-center justify-center'>
+              <FaUserFriends className='text-[#666666] text-xl' />
+            </div>
+            <p className='text-[#FFFFFF] font-semibold text-sm mb-1 font-mono'>No friends yet</p>
+            <p className='text-[#999999] text-xs font-mono'>Start by adding some friends!</p>
           </div>
         )}
       </div>

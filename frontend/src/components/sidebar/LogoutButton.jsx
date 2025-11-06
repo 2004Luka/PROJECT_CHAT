@@ -14,16 +14,16 @@ const LogoutButton = () => {
     <div>
       {!loading ? (
         <button 
-          className='w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/10 text-white rounded-lg border border-white/10 font-medium'
+          className='w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#111111] hover:bg-[#2A2A2A] text-[#FF4444] border border-[#FF4444] hover:border-[#FF6666] font-semibold font-mono text-sm focus:outline-none transition-all duration-200'
           onClick={handleLogout}
         >
-          <FaSignOutAlt className='w-4 h-4' />
+          <FaSignOutAlt className='w-3.5 h-3.5' />
           <span>Logout</span>
         </button>
       ) : (
-        <div className='w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/10 rounded-lg border border-white/10'>
-          <FaSpinner className='w-4 h-4' />
-          <span className='font-medium'>Logging out...</span>
+        <div className='w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#111111] border border-[#333333]'>
+          <FaSpinner className='w-3.5 h-3.5 animate-spin text-[#FF4444]' />
+          <span className='font-semibold text-[#FF4444] text-sm font-mono'>Logging out...</span>
         </div>
       )}
     </div>

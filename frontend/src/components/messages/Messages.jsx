@@ -54,13 +54,13 @@ const Messages = () => {
 
   return (
     <div className='h-full flex flex-col'>
-      <div ref={scrollContainerRef} className='flex-1 overflow-y-auto px-4 py-4'>
+      <div ref={scrollContainerRef} className='flex-1 overflow-y-auto px-6 py-6 bg-[#1E1E1E]'>
         {loading ? (
           <div className='space-y-4'>
             {[...Array(3)].map((_,idx)=><MessageSkeleton key={idx}/>)}
           </div>
         ) : messages.length > 0 ? (
-          <div className='space-y-4'>
+          <div className='space-y-2'>
             {messages.map((message)=>(
               <div key={message._id}
                 ref={lastMessageRef}
@@ -72,7 +72,9 @@ const Messages = () => {
           </div>
         ) : (
           <div className='flex items-center justify-center h-full'>
-            <p className='text-center text-green-300'>send a message to start conversation</p>
+            <div className='text-center p-8'>
+              <p className='text-[#999999] text-sm font-mono'>Send a message to start conversation</p>
+            </div>
           </div>
         )}
       </div>

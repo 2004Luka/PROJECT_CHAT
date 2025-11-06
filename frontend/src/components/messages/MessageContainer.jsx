@@ -35,16 +35,17 @@ const MessageContainer = () => {
 
   if (!selectedConversation) {
     return (
-      <div className='flex flex-col h-full bg-white/5 backdrop-blur-xl'>
+      <div className='flex flex-col h-full bg-[#1E1E1E]'>
         <div className='flex-1 flex items-center justify-center'>
-          <div className='text-center p-8'>
-            <div className='w-20 h-20 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center border border-white/10'>
-              <TiMessages className='text-white text-3xl' />
+          <div className='text-center p-10'>
+            {/* Empty State Icon - High-contrast design */}
+            <div className='w-24 h-24 mx-auto mb-8 bg-[#111111] border border-[#333333] flex items-center justify-center hover:border-[#00FF99] transition-colors'>
+              <TiMessages className='text-[#00FF99] text-4xl' />
             </div>
-            <h2 className='text-2xl font-bold text-white mb-2'>
-              Welcome {authUser.fullName}
+            <h2 className='text-2xl sm:text-3xl font-bold text-[#FFFFFF] mb-2 leading-tight tracking-tight font-mono'>
+              Welcome, <span className='text-[#00FF99]'>{authUser.fullName}</span>
             </h2>
-            <p className='text-base text-white/70'>Select a friend to start messaging</p>
+            <p className='text-base text-[#999999] mt-3 leading-relaxed font-mono'>Select a friend to start messaging</p>
           </div>
         </div>
       </div>
@@ -52,15 +53,11 @@ const MessageContainer = () => {
   }
 
   return (
-    <div className='flex flex-col h-full bg-white/5 backdrop-blur-xl'>
-      {/* Header */}
-      <div className='p-4 border-b border-white/10 flex-shrink-0'>
-        <div className='flex items-center justify-end gap-3'>
-          <div className='flex-1 min-w-0 text-right'>
-            <h3 className='text-white font-semibold truncate'>{recipientInfo?.name}</h3>
-            <p className='text-white/70 text-sm truncate'>@{recipientInfo?.username}</p>
-          </div>
-          <div className='w-10 h-10 rounded-full border-2 border-white/20 overflow-hidden'>
+    <div className='flex flex-col h-full bg-[#1E1E1E]'>
+      {/* Header - High-contrast dark mode */}
+      <div className='p-4 border-b border-[#333333] flex-shrink-0 bg-[#1E1E1E]'>
+        <div className='flex items-center gap-4'>
+          <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#111111] flex-shrink-0'>
             {recipientInfo?.profilePic ? (
               <img 
                 src={recipientInfo.profilePic} 
@@ -68,12 +65,17 @@ const MessageContainer = () => {
                 className='w-full h-full object-cover'
               />
             ) : (
-              <div className='w-full h-full bg-white/10 flex items-center justify-center'>
-                <span className='text-white font-bold text-lg'>
+              <div className='w-full h-full bg-[#111111] flex items-center justify-center'>
+                <span className='text-[#00FF99] font-bold text-sm font-mono'>
                   {recipientInfo?.name?.charAt(0)?.toUpperCase() || 'U'}
                 </span>
               </div>
             )}
+          </div>
+          <div className='flex-1 min-w-0'>
+            <h3 className='text-[#FFFFFF] font-semibold text-base truncate font-mono'>{recipientInfo?.name}</h3>
+            {/* Username - Monospace */}
+            <p className='text-[#999999] text-xs font-mono truncate mt-0.5'>@{recipientInfo?.username}</p>
           </div>
         </div>
       </div>
@@ -83,8 +85,8 @@ const MessageContainer = () => {
         <Messages />
       </div>
 
-      {/* Message Input */}
-      <div className='p-4 border-t border-white/10 flex-shrink-0'>
+      {/* Message Input Container */}
+      <div className='p-4 border-t border-[#333333] flex-shrink-0 bg-[#1E1E1E]'>
         <MessageInput />
       </div>
     </div>

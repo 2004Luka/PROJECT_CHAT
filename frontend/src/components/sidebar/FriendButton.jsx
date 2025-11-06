@@ -54,11 +54,11 @@ const FriendButton = ({ receiverId }) => {
         <button 
             onClick={handleSendRequest} 
             disabled={isLoading}
-            className="flex items-center gap-1 sm:gap-2 bg-white/10 text-white font-medium py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg border border-white/10 disabled:cursor-not-allowed text-xs sm:text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 bg-[#111111] hover:bg-[#2A2A2A] text-[#00FF99] font-semibold font-mono py-2 px-3 border border-[#00FF99] hover:border-[#00E689] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-xs sm:text-sm transition-colors duration-200"
         >
             {isLoading ? (
                 <>
-                    <FaSpinner />
+                    <FaSpinner className='animate-spin' />
                     <span className='hidden sm:inline'>Sending...</span>
                 </>
             ) : (

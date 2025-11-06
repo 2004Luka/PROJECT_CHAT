@@ -48,26 +48,27 @@ const SearchInput = () => {
     return (
         <div className='relative'>
             <div className='relative'>
-                <FaSearch className='absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70 text-sm' />
+                <FaSearch className='absolute left-3 top-1/2 transform -translate-y-1/2 text-[#666666] text-sm' />
+                {/* Input - High-contrast design */}
                 <input 
                     type="text" 
                     placeholder='Search users...' 
-                    className='w-full h-10 pl-10 pr-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0 text-sm' 
+                    className='w-full h-11 pl-10 pr-3 py-2 bg-[#111111] border border-[#333333] text-[#FFFFFF] placeholder-[#666666] focus:outline-none focus:border-[#00FF99] text-sm transition-colors duration-200 font-mono' 
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
             {searchResults.length > 0 && (
-                <div className='absolute z-10 w-full mt-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg max-h-60 overflow-y-auto'>
+                <div className='absolute z-10 w-full mt-2 bg-[#111111] border border-[#333333] max-h-60 overflow-y-auto'>
                     {searchResults.map((item) => (
                         <div 
                             key={item._id} 
-                            className={`p-3 flex items-center justify-between text-white border-b border-white/10 last:border-b-0
-                                ${isFriend(item) ? 'cursor-pointer' : 'cursor-default opacity-75'}`}
+                            className={`p-3 flex items-center justify-between text-[#FFFFFF] border-b border-[#333333] last:border-b-0 hover:bg-[#2A2A2A] transition-colors duration-150
+                                ${isFriend(item) ? 'cursor-pointer' : 'cursor-default opacity-50'}`}
                             onClick={() => isFriend(item) && handleItemClick(item)}
                         >
                             <div className='flex items-center gap-3'>
-                                <div className='w-10 h-10 rounded-full border-2 border-white/20 overflow-hidden'>
+                                <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#1E1E1E]'>
                                     {item.profilePic ? (
                                         <img 
                                             src={item.profilePic} 
@@ -75,21 +76,22 @@ const SearchInput = () => {
                                             className='w-full h-full object-cover'
                                         />
                                     ) : (
-                                        <div className='w-full h-full bg-white/10 flex items-center justify-center'>
-                                            <FaUser className='text-white text-sm' />
+                                        <div className='w-full h-full bg-[#111111] flex items-center justify-center border border-[#333333]'>
+                                            <FaUser className='text-[#00FF99] text-sm' />
                                         </div>
                                     )}
                                 </div>
                                 <div className='flex flex-col'>
-                                    <span className='font-medium'>{item.fullName || item.username}</span>
-                                    <span className='text-white/70 text-sm'>@{item.username}</span>
+                                    <span className='font-semibold text-sm font-mono'>{item.fullName || item.username}</span>
+                                    {/* Username - Monospace */}
+                                    <span className='text-[#999999] text-xs font-mono'>@{item.username}</span>
                                 </div>
                             </div>
                                 {item._id !== authUser._id && (
                                 isFriend(item) ? (
-                                    <div className='flex items-center gap-1 text-white/80 text-sm'>
-                                        <FaUserCheck />
-                                        <span className='hidden md:inline'>Friends</span>
+                                    <div className='flex items-center gap-1.5 text-[#00FF99] text-xs font-medium font-mono'>
+                                        <FaUserCheck className='text-sm' />
+                                        <span className='hidden md:inline'>Friend</span>
                                     </div>
                                 ) : (
                                     <FriendButton receiverId={item._id} onClick={(e) => e.stopPropagation()} />

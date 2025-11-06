@@ -24,46 +24,52 @@ const SignUp = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center min-w-96 mx-auto h-full'>
-      <div className='w-full p-4 sm:p-6 rounded-none sm:rounded-lg bg-white/5 backdrop-blur-xl border border-white/10 h-full sm:h-auto flex flex-col justify-center'>
-        <h1 className='text-2xl sm:text-3xl font-semibold text-center text-white mb-4 sm:mb-6'>
-          Sign up <span className='text-white/80'>CS</span>
-        </h1>
+    <div className='min-h-screen w-full px-4 sm:px-6 flex items-center justify-center bg-[#1E1E1E] relative overflow-hidden py-8 sm:py-12'>
+      {/* Primary Card - High-contrast dark mode */}
+      <div className='w-full max-w-md p-8 sm:p-10 bg-[#111111] border border-[#333333] flex flex-col justify-center relative z-10'>
+        <div className='text-center mb-8 sm:mb-10'>
+          <h1 className='text-3xl sm:text-4xl font-bold text-[#FFFFFF] mb-2 leading-tight tracking-tight font-mono'>
+            <span className='text-[#00FF99]'>Sign up for</span>
+            <span className='ml-2 sm:ml-3 text-[#FFFFFF]'>CS Chat</span>
+          </h1>
+          <p className='text-sm sm:text-base text-[#999999] mt-3 leading-relaxed font-mono'>Create your account to start chatting</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className='space-y-3 sm:space-y-4'>
+        <form onSubmit={handleSubmit} className='space-y-6'>
           <div>
-            <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-white/70'>Full Name</span>
+            <label className='block mb-2'>
+              <span className='text-sm font-semibold text-[#CCCCCC] font-mono'>Full Name</span>
             </label>
+            {/* Input - High-contrast design */}
             <input
               type="text"
               placeholder='John Smith'
-              className='w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0'
+              className='w-full h-12 px-4 bg-[#1E1E1E] border border-[#333333] text-[#FFFFFF] placeholder-[#666666] focus:outline-none focus:border-[#00FF99] transition-colors duration-200 text-base font-mono'
               value={inputs.fullName}
               onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
             />
           </div>
 
           <div>
-            <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-white/70'>Username</span>
+            <label className='block mb-2'>
+              <span className='text-sm font-semibold text-[#CCCCCC] font-mono'>Username</span>
             </label>
             <input
               type="text"
               placeholder='Username'
-              className='w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0'
+              className='w-full h-12 px-4 bg-[#1E1E1E] border border-[#333333] text-[#FFFFFF] placeholder-[#666666] focus:outline-none focus:border-[#00FF99] transition-colors duration-200 text-base font-mono'
               value={inputs.username}
               onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
           </div>
 
           <div>
-            <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-white/70'>Password</span>
+            <label className='block mb-2'>
+              <span className='text-sm font-semibold text-[#CCCCCC] font-mono'>Password</span>
             </label>
             <input
               type="password"
-              className="w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0"
+              className="w-full h-12 px-4 bg-[#1E1E1E] border border-[#333333] text-[#FFFFFF] placeholder-[#666666] focus:outline-none focus:border-[#00FF99] transition-colors duration-200 text-base font-mono"
               placeholder='Enter Password'
               value={inputs.password}
               onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
@@ -71,12 +77,12 @@ const SignUp = () => {
           </div>
 
           <div>
-            <label className='block p-1 sm:p-2'>
-              <span className='text-sm sm:text-base text-white/70'>Confirm Password</span>
+            <label className='block mb-2'>
+              <span className='text-sm font-semibold text-[#CCCCCC] font-mono'>Confirm Password</span>
             </label>
             <input
               type="password"
-              className="w-full h-10 px-3 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-0"
+              className="w-full h-12 px-4 bg-[#1E1E1E] border border-[#333333] text-[#FFFFFF] placeholder-[#666666] focus:outline-none focus:border-[#00FF99] transition-colors duration-200 text-base font-mono"
               placeholder='Confirm Password'
               value={inputs.confirmPassword}
               onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
@@ -85,15 +91,23 @@ const SignUp = () => {
 
           <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-          <Link to="/login" className='text-sm mt-2 inline-block text-white/70'>
-            Already have an account?
-          </Link>
+          {/* Divider line */}
+          <div className='border-t border-[#333333] pt-1'>
+            <Link to="/login" className='text-sm text-[#999999] hover:text-[#00FF99] transition-colors duration-200 inline-block font-mono'>
+              Already have an account? <span className='text-[#00FF99] font-semibold hover:text-[#00E689]'>Sign in</span>
+            </Link>
+          </div>
 
-          <div>
-            <button className='w-full mt-2 bg-white/10 text-white font-bold py-2 px-4 rounded-lg border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed' type='submit'
+          <div className='pt-2'>
+            {/* Button - Neon Green accent */}
+            <button className='w-full h-12 text-base font-semibold text-[#1E1E1E] bg-[#00FF99] hover:bg-[#00E689] border border-[#00FF99] focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-mono' type='submit'
             disabled={loading}
             >
-                {loading ? <span>⏳</span>:"Sign Up"}
+                {loading ? (
+                  <div className='flex justify-center items-center'>
+                    <div className='w-5 h-5 border-2 border-[#1E1E1E]/30 border-t-[#1E1E1E] rounded-full animate-spin'></div>
+                  </div>
+                ) : "Sign Up"}
             </button>
           </div>
         </form>

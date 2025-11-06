@@ -1,26 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar */
+@layer base {
+  * {
+    @apply border-[#333333];
+  }
+  
+  /* Body - High-Contrast Dark Mode */
+  body {
+    @apply bg-[#1E1E1E] text-[#FFFFFF] antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Monospace Font - Technical Pattern */
+  code, .font-mono, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+  }
+}
+
+/* Custom scrollbar - Dark theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent rounded-lg;
+  background: #1E1E1E;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/20 rounded-lg border border-white/10;
+  background: #333333;
+  border: 1px solid #1E1E1E;
+  transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-white/30;
+  background: #00FF99;
 }
 
 ::-webkit-scrollbar-corner {
-  @apply bg-transparent;
+  background: #1E1E1E;
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styles - Neon Green accent */
+::selection {
+  background: rgba(0, 255, 153, 0.3);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background: rgba(0, 255, 153, 0.3);
+  color: #FFFFFF;
+}
+
+/* Code block styling */
+pre {
+  background: #111111 !important;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  position: relative;
+}
+
+code {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Syntax highlighting colors */
+.hljs-keyword { color: #00FF99; }
+.hljs-string { color: #FFFFFF; }
+.hljs-comment { color: #666666; }
+.hljs-function { color: #00FF99; }
+.hljs-number { color: #FFFFFF; }
+.hljs-operator { color: #00FF99; }
