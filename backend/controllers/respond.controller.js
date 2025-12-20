@@ -2,38 +2,31 @@ import User from '../models/user.model.js';
 import { io } from '../socket/socket.js';
 
 export const respondController = async (req, res) => {
-    const { receiverId, senderId, action } = req.body; 
-
     try {
-        const receiver = await User.findById(receiverId);
-        const sender = await User.findById(senderId);
+        const { receiverId, senderId, action } = req.body;
+        if (!['accept', 'reject'].includes(action)) return res.status(400).json({ error: 'Invalid action' });
 
-        if (!receiver || !sender) {
-            return res.status(404).json({ error: 'User not found' });
-        }
+        const [receiver, sender] = await Promise.all([
+            User.findById(receiverId),
+            User.findById(senderId)
+        ]);
 
-        const requestIndex = receiver.friendRequests.findIndex(req => req.sender.equals(senderId));
-        if (requestIndex === -1) {
-            return res.status(404).json({ error: 'Friend request not found' });
-        }
+        if (!receiver || !sender) return res.status(404).json({ error: 'User not found' });
+
+        const requestIndex = receiver.friendRequests?.findIndex(req => req.sender.equals(senderId)) ?? -1;
+        if (requestIndex === -1) return res.status(404).json({ error: 'Friend request not found' });
 
         if (action === 'accept') {
-            // Add each other as friends
+            receiver.friends = receiver.friends || [];
+            sender.friends = sender.friends || [];
             receiver.friends.push(sender._id);
             sender.friends.push(receiver._id);
-            receiver.friendRequests[requestIndex].status = 'accepted';
             io.to(senderId.toString()).emit('friendRequestAccepted', { friend: receiver });
-      io.to(receiverId.toString()).emit('friendRequestAccepted', { friend: sender });
-        } else if (action === 'reject') {
-            receiver.friendRequests[requestIndex].status = 'rejected';
-        } else {
-            return res.status(400).json({ error: 'Invalid action' });
+            io.to(receiverId.toString()).emit('friendRequestAccepted', { friend: sender });
         }
 
         receiver.friendRequests.splice(requestIndex, 1);
-
-        await receiver.save();
-        await sender.save();
+        await Promise.all([receiver.save(), sender.save()]);
 
         res.status(200).json({ message: `Friend request ${action}ed successfully` });
     } catch (error) {

@@ -4,66 +4,55 @@ import toast from 'react-hot-toast';
 import config from '../config/config';
 
 const useGetFriends = () => {
-  const [friends, setFriends] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { authUser } = useAuthContext();
+    const [friends, setFriends] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { authUser } = useAuthContext();
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      if (!authUser) {
-        setLoading(false);
-        return;
-      }
-
-      setLoading(true);
-      setError(null);
-
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          throw new Error('No authentication token found');
+    useEffect(() => {
+        if (!authUser) {
+            setLoading(false);
+            return;
         }
 
-        const res = await fetch(`${config.API_BASE_URL}/api/friends/${authUser._id}/friends`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        const fetchFriends = async () => {
+            setLoading(true);
+            setError(null);
 
-        if (!res.ok) {
-          throw new Error(`Failed to fetch friends: ${res.status} ${res.statusText}`);
-        }
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) throw new Error('No authentication token found');
 
-        const data = await res.json();
+                const res = await fetch(`${config.API_BASE_URL}/api/friends/${authUser._id}/friends`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
 
-        if (Array.isArray(data.friends)) {
-          // Ensure each friend object has the required properties
-          const processedFriends = data.friends.map(friend => ({
-            _id: friend._id,
-            username: friend.username,
-            fullName: friend.fullName || friend.username, // Fallback to username if fullName is not available
-            profilePic: friend.profilePic || '/default-avatar.png', // Provide a default avatar if not available
-          }));
-          setFriends(processedFriends);
-        } else {
-          console.error('Unexpected friends data format:', data);
-          setFriends([]);
-        }
-      } catch (error) {
-        console.error('Error fetching friends:', error);
-        setError(error.message);
-        toast.error(error.message);
-        setFriends([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+                if (!res.ok) throw new Error(`Failed to fetch friends: ${res.status}`);
 
-    fetchFriends();
-  }, [authUser]);
+                const data = await res.json();
+                const processedFriends = Array.isArray(data.friends)
+                    ? data.friends.map(friend => ({
+                        _id: friend._id,
+                        username: friend.username,
+                        fullName: friend.fullName || friend.username,
+                        profilePic: friend.profilePic || '/default-avatar.png'
+                    }))
+                    : [];
 
-  return { friends, loading, error };
+                setFriends(processedFriends);
+            } catch (error) {
+                setError(error.message);
+                toast.error(error.message);
+                setFriends([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFriends();
+    }, [authUser]);
+
+    return { friends, setFriends, loading, error };
 };
 
 export default useGetFriends;

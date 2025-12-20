@@ -8,7 +8,7 @@ const messageSchema = new mongoose.Schema({
     },
     receiverId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User", 
+        ref: "User",
         required: true
     },
     message: {
@@ -31,7 +31,7 @@ const messageSchema = new mongoose.Schema({
         type: String,
         default: null
     }
-},{timestamps:true});
+}, { timestamps: true });
 
 const Message = mongoose.model('Message', messageSchema);
 
