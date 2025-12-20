@@ -5,6 +5,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
 import http from 'http';
+import https from 'https';
 
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
@@ -61,7 +62,8 @@ server.listen(PORT,()=>{
 
     if (process.env.NODE_ENV === "production") {
         const url = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
-        http.get(`${url}/health`);
-        setInterval(() => http.get(`${url}/health`), 14 * 60 * 1000);
+        const client = url.startsWith('https') ? https : http;
+        client.get(`${url}/health`);
+        setInterval(() => client.get(`${url}/health`), 14 * 60 * 1000);
     }
 });
