@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
+import http from 'http';
 
 import authRouts from './routs/auth.routes.js';
 import messageRoutes from './routs/message.routes.js';
@@ -38,6 +39,11 @@ app.use("/api/users",userRoutes)
 app.use("/api/friends",requestRoutes)
 app.use("/api/images",imageRoutes)
 
+// Health check endpoint for keep-alive
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 // Serve uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -53,4 +59,9 @@ server.listen(PORT,()=>{
     connectToMongoDB();
     console.log(`server running on port ${PORT}`);
 
+    if (process.env.NODE_ENV === "production") {
+        const url = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+        http.get(`${url}/health`);
+        setInterval(() => http.get(`${url}/health`), 14 * 60 * 1000);
+    }
 });
