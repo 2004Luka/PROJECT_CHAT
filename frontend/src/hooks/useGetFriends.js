@@ -35,7 +35,7 @@ const useGetFriends = () => {
                         _id: friend._id,
                         username: friend.username,
                         fullName: friend.fullName || friend.username,
-                        profilePic: friend.profilePic || '/default-avatar.png'
+                        profilePic: friend.profilePic || null
                     }))
                     : [];
 

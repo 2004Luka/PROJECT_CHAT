@@ -3,6 +3,7 @@ import useConversation from '../../zustand/useConversation';
 import { useSocketContext } from '../../context/SocketContext';
 import FriendButton from './FriendButton';
 import useGetFriends from '../../hooks/useGetFriends';
+import getProfilePic from '../../utils/getProfilePic';
 import { FaUser, FaCircle, FaUserCheck } from 'react-icons/fa';
 
 const Conversation = ({ conversation, lastIdx }) => {
@@ -38,17 +39,21 @@ const Conversation = ({ conversation, lastIdx }) => {
                 {/* Profile Picture */}
                 <div className='relative flex-shrink-0'>
                     <div className="w-10 h-10 border border-[#333333] overflow-hidden bg-[#111111]">
-                        {conversation.profilePic ? (
-                            <img 
-                                src={conversation.profilePic} 
-                                alt={`${conversation.fullName}'s profile`}
-                                className='w-full h-full object-cover'
-                            />
-                        ) : (
-                            <div className='w-full h-full bg-[#111111] flex items-center justify-center border border-[#333333]'>
-                                <FaUser className='text-[#00FF99] text-sm' />
-                            </div>
-                        )}
+                        <img 
+                            src={getProfilePic(conversation.profilePic)} 
+                            alt={`${conversation.fullName}'s profile`}
+                            className='w-full h-full object-cover'
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.display = 'none';
+                                if (e.target.nextElementSibling) {
+                                    e.target.nextElementSibling.style.display = 'flex';
+                                }
+                            }}
+                        />
+                        <div className='w-full h-full hidden bg-[#111111] items-center justify-center border border-[#333333]'>
+                            <FaUser className='text-[#00FF99] text-sm' />
+                        </div>
                     </div>
                     {/* Online Status Indicator - Neon Green */}
                     {isOnline && (

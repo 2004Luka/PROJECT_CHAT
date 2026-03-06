@@ -4,6 +4,7 @@ import useGetConversations from '../../hooks/useGetConversations'
 import useGetFriends from '../../hooks/useGetFriends'
 import { useAuthContext } from '../../context/AuthContext';
 import FriendButton from './FriendButton';
+import getProfilePic from '../../utils/getProfilePic';
 import toast from 'react-hot-toast';
 import { FaSearch, FaUser, FaUserCheck } from 'react-icons/fa';
 
@@ -69,17 +70,21 @@ const SearchInput = () => {
                         >
                             <div className='flex items-center gap-3'>
                                 <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#1E1E1E]'>
-                                    {item.profilePic ? (
-                                        <img 
-                                            src={item.profilePic} 
-                                            alt={item.fullName} 
-                                            className='w-full h-full object-cover'
-                                        />
-                                    ) : (
-                                        <div className='w-full h-full bg-[#111111] flex items-center justify-center border border-[#333333]'>
-                                            <FaUser className='text-[#00FF99] text-sm' />
-                                        </div>
-                                    )}
+                                    <img 
+                                        src={getProfilePic(item.profilePic)} 
+                                        alt={item.fullName} 
+                                        className='w-full h-full object-cover'
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.style.display = 'none';
+                                            if (e.target.nextElementSibling) {
+                                                e.target.nextElementSibling.style.display = 'flex';
+                                            }
+                                        }}
+                                    />
+                                    <div className='w-full h-full hidden bg-[#111111] items-center justify-center border border-[#333333]'>
+                                        <FaUser className='text-[#00FF99] text-sm' />
+                                    </div>
                                 </div>
                                 <div className='flex flex-col'>
                                     <span className='font-semibold text-sm font-mono'>{item.fullName || item.username}</span>

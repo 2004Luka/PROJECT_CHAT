@@ -18,14 +18,13 @@ export const signup = async (req, res) => {
         if (await User.findOne({ username })) return res.status(400).json({ error: "Username already exists" });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const profilePic = `https://avatar.iran.liara.run/public/${gender === 'male' ? 'boy' : 'girl'}?username=${username}`;
 
         const newUser = await User.create({
             fullName,
             username,
             password: hashedPassword,
             gender,
-            profilePic
+            profilePic: "/uploads/placeholder.webp"
         });
 
         const token = generateTokenAndSetCookie(newUser._id, res);

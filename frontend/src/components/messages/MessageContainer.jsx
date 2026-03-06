@@ -4,6 +4,7 @@ import MessageInput from './MessageInput';
 import { TiMessages } from "react-icons/ti";
 import useConversation from '../../zustand/useConversation';
 import { useAuthContext } from '../../context/AuthContext';
+import getProfilePic from '../../utils/getProfilePic';
 
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
@@ -16,7 +17,7 @@ const MessageContainer = () => {
         return {
             name: selectedConversation.fullName || selectedConversation.username || 'Unknown User',
             username: selectedConversation.username || 'unknown',
-            profilePic: selectedConversation.profilePic
+            profilePic: getProfilePic(selectedConversation.profilePic)
         };
     }, [selectedConversation]);
 
@@ -43,15 +44,23 @@ const MessageContainer = () => {
             <div className='p-4 border-b border-[#333333] flex-shrink-0 bg-[#1E1E1E]'>
                 <div className='flex items-center gap-4'>
                     <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#111111] flex-shrink-0'>
-                        {recipientInfo?.profilePic ? (
-                            <img src={recipientInfo.profilePic} alt={recipientInfo.name} className='w-full h-full object-cover' />
-                        ) : (
-                            <div className='w-full h-full bg-[#111111] flex items-center justify-center'>
-                                <span className='text-[#00FF99] font-bold text-sm font-mono'>
-                                    {recipientInfo?.name?.charAt(0)?.toUpperCase() || 'U'}
-                                </span>
-                            </div>
-                        )}
+                        <img 
+                            src={recipientInfo?.profilePic} 
+                            alt={recipientInfo?.name} 
+                            className='w-full h-full object-cover'
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.display = 'none';
+                                if (e.target.nextElementSibling) {
+                                    e.target.nextElementSibling.style.display = 'flex';
+                                }
+                            }}
+                        />
+                        <div className='w-full h-full hidden bg-[#111111] items-center justify-center'>
+                            <span className='text-[#00FF99] font-bold text-sm font-mono'>
+                                {recipientInfo?.name?.charAt(0)?.toUpperCase() || 'U'}
+                            </span>
+                        </div>
                     </div>
                     <div className='flex-1 min-w-0'>
                         <h3 className='text-[#FFFFFF] font-semibold text-base truncate font-mono'>{recipientInfo?.name}</h3>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { FaUser, FaCircle } from 'react-icons/fa';
+import getProfilePic from '../../utils/getProfilePic';
 
 const FriendItem = ({ friend, onStartChat, lastIdx }) => {
+  const profilePicUrl = getProfilePic(friend.profilePic);
+  
   return (
     <>
       {/* Friend Item Card - High-contrast dark mode */}
@@ -12,17 +15,19 @@ const FriendItem = ({ friend, onStartChat, lastIdx }) => {
       >
         <div className='relative flex-shrink-0'>
           <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#111111]'>
-            {friend.profilePic ? (
-              <img 
-                src={friend.profilePic} 
-                alt='user avatar' 
-                className='w-full h-full object-cover'
-              />
-            ) : (
-              <div className='w-full h-full bg-[#111111] flex items-center justify-center border border-[#333333]'>
-                <FaUser className='text-[#00FF99] text-sm' />
-              </div>
-            )}
+            <img 
+              src={profilePicUrl} 
+              alt='user avatar' 
+              className='w-full h-full object-cover'
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = 'none';
+                e.target.nextElementSibling.style.display = 'flex';
+              }}
+            />
+            <div className='w-full h-full bg-[#111111] hidden items-center justify-center border border-[#333333]'>
+              <FaUser className='text-[#00FF99] text-sm' />
+            </div>
           </div>
           {/* Online Status Indicator - Neon Green */}
           <div className='absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#00FF99] rounded-full border-2 border-[#1E1E1E]'></div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useGetFriendRequests from '../../hooks/useGetFriendRequests.js';
 import { useAuthContext } from "../../context/AuthContext.jsx";
 import { useSocketContext } from '../../context/SocketContext.jsx';
+import getProfilePic from '../../utils/getProfilePic';
 import toast from 'react-hot-toast';
 import { FaUserPlus, FaUserCheck, FaUserTimes, FaSpinner, FaUserClock } from 'react-icons/fa';
 
@@ -93,17 +94,21 @@ const FriendRequestList = () => {
                         <div key={request.sender._id} className='bg-[#111111] border border-[#333333] p-4 hover:border-[#00FF99] transition-colors duration-200'>
                             <div className='flex items-center gap-3 mb-4'>
                                 <div className='w-10 h-10 border border-[#333333] overflow-hidden bg-[#1E1E1E]'>
-                                    {request.sender.profilePic ? (
-                                        <img 
-                                            src={request.sender.profilePic} 
-                                            alt={request.sender.username}
-                                            className='w-full h-full object-cover'
-                                        />
-                                    ) : (
-                                        <div className='w-full h-full bg-[#111111] flex items-center justify-center border border-[#333333]'>
-                                            <FaUserPlus className='text-[#00FF99] text-sm' />
-                                        </div>
-                                    )}
+                                    <img 
+                                        src={getProfilePic(request.sender.profilePic)} 
+                                        alt={request.sender.username}
+                                        className='w-full h-full object-cover'
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.style.display = 'none';
+                                            if (e.target.nextElementSibling) {
+                                                e.target.nextElementSibling.style.display = 'flex';
+                                            }
+                                        }}
+                                    />
+                                    <div className='w-full h-full hidden bg-[#111111] items-center justify-center border border-[#333333]'>
+                                        <FaUserPlus className='text-[#00FF99] text-sm' />
+                                    </div>
                                 </div>
                                 <div className='flex-1 min-w-0'>
                                     <p className='text-[#FFFFFF] font-semibold truncate text-sm font-mono'>{request.sender.fullName || request.sender.username}</p>

@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
-        default: ""
+        default: "/uploads/placeholder.webp"
     },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     friendRequests: [{

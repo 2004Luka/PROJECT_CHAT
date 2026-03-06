@@ -4,45 +4,42 @@ import MessageContainer from '../../components/messages/MessageContainer';
 import { FaBars } from 'react-icons/fa';
 
 const Home = () => {
-    const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1024);
-    const [showSidebar, setShowSidebar] = useState(() => window.innerWidth >= 1024);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const mobile = window.innerWidth < 1024;
-            setIsMobile(mobile);
-            setShowSidebar(!mobile);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const [showSidebar, setShowSidebar] = useState(false);
 
     const toggleSidebar = useCallback(() => setShowSidebar(prev => !prev), []);
 
     return (
         <>
-            {isMobile && !showSidebar && (
-                <button
-                    onClick={toggleSidebar}
-                    className='fixed top-4 left-4 z-50 p-3 text-[#FFFFFF] bg-[#111111] border border-[#333333] hover:border-[#00FF99] transition-colors'
-                >
-                    <FaBars className='w-5 h-5' />
-                </button>
-            )}
+            {/* Sidebar toggle button - Only visible on mobile when sidebar is closed */}
+            <button
+                onClick={toggleSidebar}
+                className={`fixed top-4 left-4 z-50 p-3 text-[#FFFFFF] bg-[#111111] border border-[#333333] hover:border-[#00FF99] transition-colors lg:hidden ${showSidebar ? 'hidden' : ''}`}
+            >
+                <FaBars className='w-5 h-5' />
+            </button>
 
             <div className='flex h-screen w-full bg-[#1E1E1E] relative overflow-hidden'>
-                <div className={`${isMobile ? `fixed inset-y-0 left-0 z-40 w-80 bg-[#1E1E1E] ${showSidebar ? '' : 'hidden'}` : 'w-80 flex-shrink-0'} h-full border-r border-[#333333]`}>
-                    <Sidebar onClose={isMobile ? toggleSidebar : null} />
+                {/* Sidebar container */}
+                <div className={`
+                    ${showSidebar ? 'translate-x-0' : '-translate-x-full'} 
+                    lg:translate-x-0 
+                    fixed lg:static inset-y-0 left-0 z-40 w-80 
+                    bg-[#1E1E1E] border-r border-[#333333] 
+                    transition-transform duration-300 ease-in-out
+                    flex-shrink-0
+                `}>
+                    <Sidebar onClose={toggleSidebar} />
                 </div>
 
-                {isMobile && showSidebar && (
+                {/* Mobile Overlay */}
+                {showSidebar && (
                     <div
-                        className='fixed inset-0 bg-[#1E1E1E]/80 backdrop-blur-sm z-30 transition-opacity duration-200'
+                        className='fixed inset-0 bg-[#1E1E1E]/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-200'
                         onClick={toggleSidebar}
                     />
                 )}
 
+                {/* Main Content Area */}
                 <div className='flex-1 h-full overflow-hidden relative min-w-0'>
                     <MessageContainer />
                 </div>

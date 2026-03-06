@@ -8,11 +8,11 @@ import http from 'http';
 import https from 'https';
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
-import authRouts from './routs/auth.routes.js';
-import messageRoutes from './routs/message.routes.js';
-import userRoutes from './routs/user.routes.js';
-import requestRoutes from './routs/request.routes.js';
-import imageRoutes from './routs/image.routes.js';
+import authRoutes from './routes/auth.routes.js';
+import messageRoutes from './routes/message.routes.js';
+import userRoutes from './routes/user.routes.js';
+import requestRoutes from './routes/request.routes.js';
+import imageRoutes from './routes/image.routes.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -26,7 +26,7 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use("/api/auth", authRouts);
+app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/friends", requestRoutes);

@@ -129,7 +129,7 @@ PROJECT_CHAT/
 │   ├── db/             # Database connection
 │   ├── middleware/     # Custom middleware
 │   ├── models/         # Database models
-│   ├── routs/          # API routes
+│   ├── routs/          # API routes (renamed to routes/)
 │   ├── socket/         # Socket.io configuration
 │   └── utils/          # Utility functions
 ├── frontend/

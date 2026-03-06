@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon backend/server.js",
+    "frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "start": "node backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "setup-dev": "node setup-dev.js"
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "concurrently": "^9.2.1",
     "daisyui": "^4.12.10",
     "nodemon": "^3.1.4",
     "postcss": "^8.4.39",
