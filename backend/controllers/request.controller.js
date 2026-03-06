@@ -2,8 +2,10 @@ import User from '../models/user.model.js';
 
 export const requestController = async (req, res) => {
     try {
-        const { senderId, receiverId } = req.body;
-        if (!senderId || !receiverId) return res.status(400).json({ error: 'Sender and receiver IDs are required' });
+        const { receiverId } = req.body;
+        const senderId = req.user._id;
+
+        if (!receiverId) return res.status(400).json({ error: 'Receiver ID is required' });
 
         const [receiver, sender] = await Promise.all([
             User.findById(receiverId),

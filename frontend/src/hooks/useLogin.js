@@ -22,9 +22,8 @@ const useLogin = () => {
                 throw new Error(data.error || 'Login failed');
             }
 
-            // Store user data and token in localStorage
+            // Store user data in localStorage
             localStorage.setItem("chat-user", JSON.stringify(data));
-            localStorage.setItem('token', data.token); // Store the token
 
             // Set the authenticated user in context
             setAuthUser(data);

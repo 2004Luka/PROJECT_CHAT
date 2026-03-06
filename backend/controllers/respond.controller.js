@@ -1,9 +1,11 @@
 import User from '../models/user.model.js';
-import { io } from '../socket/socket.js';
+import { io, getRecieverSocketId } from '../socket/socket.js';
 
 export const respondController = async (req, res) => {
     try {
-        const { receiverId, senderId, action } = req.body;
+        const { senderId, action } = req.body;
+        const receiverId = req.user._id;
+
         if (!['accept', 'reject'].includes(action)) return res.status(400).json({ error: 'Invalid action' });
 
         const [receiver, sender] = await Promise.all([
@@ -21,8 +23,12 @@ export const respondController = async (req, res) => {
             sender.friends = sender.friends || [];
             receiver.friends.push(sender._id);
             sender.friends.push(receiver._id);
-            io.to(senderId.toString()).emit('friendRequestAccepted', { friend: receiver });
-            io.to(receiverId.toString()).emit('friendRequestAccepted', { friend: sender });
+
+            const senderSocketId = getRecieverSocketId(senderId);
+            const receiverSocketId = getRecieverSocketId(receiverId);
+
+            if (senderSocketId) io.to(senderSocketId).emit('friendRequestAccepted', { friend: receiver });
+            if (receiverSocketId) io.to(receiverSocketId).emit('friendRequestAccepted', { friend: sender });
         }
 
         receiver.friendRequests.splice(requestIndex, 1);

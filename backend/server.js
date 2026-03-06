@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import cors from 'cors';
 import http from 'http';
 import https from 'https';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
 import authRoutes from './routes/auth.routes.js';
@@ -16,6 +18,22 @@ import imageRoutes from './routes/image.routes.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
+
+// Security: Helmet for security headers
+app.use(helmet({
+    crossOriginResourcePolicy: false, // Allow cross-origin images for now
+}));
+
+// Security: Rate limiting for auth routes
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: { error: "Too many requests from this IP, please try again after 15 minutes" },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use("/api/auth", authLimiter);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
 

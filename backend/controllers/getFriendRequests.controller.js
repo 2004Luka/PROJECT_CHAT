@@ -2,7 +2,7 @@ import User from '../models/user.model.js';
 
 export const getFriendRequestsController = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const userId = req.user._id;
         const user = await User.findById(userId).populate('friendRequests.sender', 'username fullName profilePic');
 
         if (!user) return res.status(404).json({ error: 'User not found' });

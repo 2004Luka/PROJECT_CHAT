@@ -1,12 +1,16 @@
+import { filterXSS } from 'xss';
 import Conversation from '../models/conversation.model.js';
 import Message from '../models/message.model.js';
 import { getRecieverSocketId, io } from '../socket/socket.js';
 
 export const sendMessage = async (req, res) => {
     try {
-        const { message = "", imageUrl, fileUrl, fileName, fileType } = req.body;
+        let { message = "", imageUrl, fileUrl, fileName, fileType } = req.body;
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
+
+        // Sanitize the message content
+        message = filterXSS(message);
 
         let conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] }

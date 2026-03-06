@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaCopy } from 'react-icons/fa';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const CodeBlock = ({ code, language }) => {
   const [copied, setCopied] = useState(false);
@@ -12,26 +14,32 @@ const CodeBlock = ({ code, language }) => {
 
   return (
     <div className='mt-2 mb-2 relative group/code'>
-      <div className='bg-[#111111] border border-[#333333] rounded p-4 relative'>
+      <div className='bg-[#111111] border border-[#333333] rounded overflow-hidden relative'>
         {language && (
-          <div className='text-xs text-[#999999] font-mono mb-2 pb-2 border-b border-[#333333]'>
-            {language}
+          <div className='text-xs text-[#999999] font-mono px-4 py-2 bg-[#1A1A1A] border-b border-[#333333] flex justify-between items-center'>
+            <span>{language}</span>
           </div>
         )}
-        <pre className='overflow-x-auto'>
-          <code className='text-[#FFFFFF] font-mono text-sm leading-relaxed'>
-            {code.split('\n').map((line, lineIdx) => {
-              // Simple syntax highlighting (matches original logic)
-              const highlighted = line
-                .replace(/(const|let|var|function|if|else|return|class|import|export|from|default)/g, '<span class="text-[#00FF99]">$1</span>')
-                .replace(/(["'`])((?:(?=(\\?))\3.)*?)\1/g, '<span class="text-[#FFFFFF]">$1$2$1</span>')
-                .replace(/(\/\/.*$)/gm, '<span class="text-[#666666]">$1</span>');
-              return (
-                <div key={lineIdx} dangerouslySetInnerHTML={{ __html: highlighted || ' ' }} />
-              );
-            })}
-          </code>
-        </pre>
+        <div className='p-1'>
+          <SyntaxHighlighter
+            language={language?.toLowerCase() || 'javascript'}
+            style={vscDarkPlus}
+            customStyle={{
+              margin: 0,
+              padding: '1rem',
+              background: 'transparent',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+            }}
+            codeTagProps={{
+              style: {
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+              }
+            }}
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
         <button
           onClick={handleCopy}
           className='absolute top-2 right-2 p-1.5 text-[#999999] hover:text-[#00FF99] hover:bg-[#2A2A2A] border border-transparent hover:border-[#333333] rounded transition-colors opacity-0 group-hover/code:opacity-100'

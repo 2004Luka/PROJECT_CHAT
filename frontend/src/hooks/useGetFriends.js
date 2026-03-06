@@ -20,12 +20,7 @@ const useGetFriends = () => {
             setError(null);
 
             try {
-                const token = localStorage.getItem('token');
-                if (!token) throw new Error('No authentication token found');
-
-                const res = await fetch(`${config.API_BASE_URL}/api/friends/${authUser._id}/friends`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
+                const res = await fetch(`${config.API_BASE_URL}/api/friends/${authUser._id}/friends`);
 
                 if (!res.ok) throw new Error(`Failed to fetch friends: ${res.status}`);
 

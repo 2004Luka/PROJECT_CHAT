@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import { filterXSS } from 'xss';
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 const getUserResponse = (user, token) => ({
@@ -13,15 +14,34 @@ const getUserResponse = (user, token) => ({
 export const signup = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
+        
+        // Sanitize and normalize
+        const sanitizedFullName = filterXSS(fullName.trim());
+        const lowerUsername = username.trim().toLowerCase();
+        const sanitizedUsername = filterXSS(lowerUsername);
 
-        if (password !== confirmPassword) return res.status(400).json({ message: "Passwords do not match" });
-        if (await User.findOne({ username })) return res.status(400).json({ error: "Username already exists" });
+        if (!sanitizedUsername || !password || !sanitizedFullName) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        if (password.length < 6) {
+            return res.status(400).json({ error: "Password must be at least 6 characters long" });
+        }
+
+        if (password !== confirmPassword) {
+            return res.status(400).json({ error: "Passwords do not match" });
+        }
+
+        const user = await User.findOne({ username: sanitizedUsername });
+        if (user) {
+            return res.status(400).json({ error: "Username already exists" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 12); // Slightly higher salt rounds
 
         const newUser = await User.create({
-            fullName,
-            username,
+            fullName: sanitizedFullName,
+            username: sanitizedUsername,
             password: hashedPassword,
             gender,
             profilePic: "/uploads/placeholder.webp"
@@ -38,7 +58,8 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await User.findOne({ username });
+        const normalizedUsername = username.trim().toLowerCase();
+        const user = await User.findOne({ username: normalizedUsername });
         
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(400).json({ error: "Invalid credentials" });

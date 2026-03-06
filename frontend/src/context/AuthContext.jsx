@@ -14,9 +14,7 @@ export const AuthContextProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        if (!localStorage.getItem('token')) {
-            setAuthUser(null);
-        }
+        // Validation could be added here later if needed
     }, []);
 
     return (

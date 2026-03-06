@@ -30,17 +30,10 @@ const FriendRequestList = () => {
     const handleRespond = async (senderId, action) => {
         setRespondingTo(senderId);
         try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                throw new Error('No authentication token found');
-            }
-
             const res = await fetch('/api/friends/respond', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     receiverId: authUser._id,

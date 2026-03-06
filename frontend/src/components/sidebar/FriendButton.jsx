@@ -25,8 +25,7 @@ const FriendButton = ({ receiverId }) => {
             const res = await fetch('/api/friends/requests', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     senderId: authUser._id,

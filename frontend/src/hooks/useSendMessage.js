@@ -10,11 +10,8 @@ const useSendMessage = () => {
     const uploadFile = useCallback(async (file) => {
         const formData = new FormData();
         formData.append('image', file);
-        const token = localStorage.getItem('token');
-
         const res = await fetch(`${config.API_BASE_URL}/api/images/upload`, {
             method: 'POST',
-            headers: { 'Authorization': `Bearer ${token}` },
             body: formData
         });
 
@@ -52,8 +49,7 @@ const useSendMessage = () => {
             const res = await fetch(`${config.API_BASE_URL}/api/messages/send/${selectedConversation._id}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ message: message || "", imageUrl, fileUrl, fileName, fileType })
             });
