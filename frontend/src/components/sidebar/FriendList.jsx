@@ -3,10 +3,10 @@ import useGetFriends from '../../hooks/useGetFriends';
 import FriendItem from './FriendItem';
 import useConversation from '../../zustand/useConversation';
 import { useSocketContext } from '../../context/SocketContext.jsx';
-import { FaUserFriends, FaSpinner } from 'react-icons/fa';
+import { FaUserFriends, FaSpinner, FaSync } from 'react-icons/fa';
 
 const FriendsList = () => {
-    const { friends, setFriends, loading, error } = useGetFriends();
+    const { friends, setFriends, loading, error, refetch } = useGetFriends();
     const { setSelectedConversation } = useConversation();
     const { socket } = useSocketContext();
 
@@ -32,9 +32,19 @@ const FriendsList = () => {
 
     return (
         <div className='flex flex-col h-full'>
-            <div className='flex items-center gap-3 mb-4 pb-3 border-b border-[#333333]'>
-                <FaUserFriends className='text-[#00FF99] text-sm' />
-                <h3 className='text-[#FFFFFF] font-semibold text-sm font-mono'>Friends ({friends.length})</h3>
+            <div className='flex items-center justify-between mb-4 pb-3 border-b border-[#333333]'>
+                <div className='flex items-center gap-3'>
+                    <FaUserFriends className='text-[#00FF99] text-sm' />
+                    <h3 className='text-[#FFFFFF] font-semibold text-sm font-mono'>Friends ({friends.length})</h3>
+                </div>
+                <button 
+                    onClick={refetch}
+                    disabled={loading}
+                    className='p-1.5 bg-[#111111] border border-[#333333] hover:border-[#00FF99] text-[#666666] hover:text-[#00FF99] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed group'
+                    title='Refresh List'
+                >
+                    <FaSync className={`text-xs ${loading ? 'animate-spin text-[#00FF99]' : 'group-hover:rotate-180 transition-transform duration-500'}`} />
+                </button>
             </div>
 
             <div className='flex-1 overflow-y-auto space-y-2'>
